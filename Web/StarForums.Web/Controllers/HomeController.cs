@@ -19,7 +19,7 @@
         public IActionResult Index()
         {
             var categories = this.categoriesService.GetAll<CategoryViewModel>().ToList();
-            var viewmodel = new CategoryListViewModel() { Categories = categories };
+            var viewmodel = new CategoryListModel() { Categories = categories };
 
             return this.View(viewmodel);
         }

@@ -1,5 +1,5 @@
 ﻿@using StarForums.Common
-@model StarForums.Web.ViewModels.Home.CategoryListViewModel
+@model StarForums.Web.ViewModels.Home.CategoryListModel
 @{ this.ViewData["Title"] = "Home Page"; }
 
 <div class="text-center">
@@ -7,7 +7,7 @@
         @foreach (var category in Model.Categories)
         {
             <tr>
-                <td><a href="#">@category.Name</a></td>
+                <td><a href="@category.Name">@category.Name</a></td>
                 <td>@category.Description</td>
             </tr>
         }

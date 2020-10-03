@@ -1,13 +1,15 @@
 ﻿namespace StarForums.Services.Data
 {
-    using StarForums.Data.Models;
     using System.Collections.Generic;
-    using System.Threading.Tasks;
+
+    using StarForums.Data.Models;
 
     public interface ICategoriesService
     {
         IEnumerable<T> GetAll<T>();
 
-        Category GetById<T>(int id);
+        Category GetById(int id);
+
+        Category GetByName(string name);
     }
 }

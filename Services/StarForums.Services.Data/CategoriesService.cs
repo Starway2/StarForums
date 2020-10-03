@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-
+    using System.Threading.Tasks;
     using StarForums.Data.Common.Repositories;
     using StarForums.Data.Models;
     using StarForums.Services.Mapping;
@@ -23,9 +23,14 @@
             return query.To<T>().ToList();
         }
 
-        public Category GetById<T>(int id)
+        public Category GetById(int id)
         {
             return this.repository.All().Where(c => c.Id == id).FirstOrDefault();
+        }
+
+        public Category GetByName(string name)
+        {
+            return this.repository.All().Where(c => c.Name == name).FirstOrDefault();
         }
     }
 }
