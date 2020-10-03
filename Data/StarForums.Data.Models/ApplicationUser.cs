@@ -4,9 +4,8 @@ namespace StarForums.Data.Models
     using System;
     using System.Collections.Generic;
 
-    using StarForums.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+    using StarForums.Data.Common.Models;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
@@ -25,6 +24,8 @@ namespace StarForums.Data.Models
 
         // Deletable entity
         public bool IsDeleted { get; set; }
+
+        public string AvatarUrl { get; set; }
 
         public DateTime? DeletedOn { get; set; }
 
