@@ -1,16 +1,27 @@
 ﻿namespace StarForums.Web.Controllers
 {
     using System.Diagnostics;
-
-    using StarForums.Web.ViewModels;
-
+    using System.Linq;
     using Microsoft.AspNetCore.Mvc;
+    using StarForums.Services.Data;
+    using StarForums.Web.ViewModels;
+    using StarForums.Web.ViewModels.Home;
 
     public class HomeController : BaseController
     {
+        private readonly ICategoriesService categoriesService;
+
+        public HomeController(ICategoriesService categoriesService)
+        {
+            this.categoriesService = categoriesService;
+        }
+
         public IActionResult Index()
         {
-            return this.View();
+            var categories = this.categoriesService.GetAll<CategoryViewModel>().ToList();
+            var viewmodel = new CategoryListViewModel() { Categories = categories };
+
+            return this.View(viewmodel);
         }
 
         public IActionResult Privacy()
