@@ -3,12 +3,11 @@
     using System;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Mvc;
     using StarForums.Data.Common.Repositories;
     using StarForums.Data.Models;
     using StarForums.Services.Data;
     using StarForums.Web.ViewModels.Settings;
-
-    using Microsoft.AspNetCore.Mvc;
 
     public class SettingsController : BaseController
     {

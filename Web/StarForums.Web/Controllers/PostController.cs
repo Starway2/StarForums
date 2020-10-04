@@ -1,5 +1,7 @@
 ﻿namespace StarForums.Web.Controllers
 {
+    using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -7,7 +9,6 @@
     using StarForums.Services.Data;
     using StarForums.Web.ViewModels.Home;
     using StarForums.Web.ViewModels.Posts;
-    using System.Threading.Tasks;
 
     public class PostController : Controller
     {

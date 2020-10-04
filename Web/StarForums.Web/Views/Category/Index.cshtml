@@ -9,7 +9,7 @@
         @foreach (var post in Model.Posts)
         {
             <tr>
-                <td>@post.Title</td>
+                <td><a href="/@Model.Name/@post.Id">@post.Title</a></td>
             </tr>
         }
     </table>

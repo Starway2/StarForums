@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using StarForums.Data.Common.Repositories;
     using StarForums.Data.Models;
     using StarForums.Services.Mapping;
@@ -54,9 +55,9 @@
 
         public T GetById<T>(int id)
         {
-            var post = this.repository.All().Where(x => x.Id == id);
+            var post = this.repository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
 
-            return post.To<T>().FirstOrDefault();
+            return post;
         }
     }
 }

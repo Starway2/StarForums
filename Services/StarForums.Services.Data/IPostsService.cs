@@ -1,8 +1,9 @@
 ﻿namespace StarForums.Services.Data
 {
-    using StarForums.Web.ViewModels.Posts;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
+    using StarForums.Web.ViewModels.Posts;
 
     public interface IPostsService
     {

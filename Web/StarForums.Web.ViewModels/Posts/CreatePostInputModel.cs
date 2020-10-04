@@ -2,8 +2,6 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    using StarForums.Data.Models;
-
     public class CreatePostInputModel
     {
         [Required]
