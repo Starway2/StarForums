@@ -1,8 +1,11 @@
 ﻿namespace StarForums.Web.ViewModels.Posts
 {
+    using System.Collections.Generic;
+
     using Ganss.XSS;
     using StarForums.Data.Models;
     using StarForums.Services.Mapping;
+    using StarForums.Web.ViewModels.Comments;
 
     public class PostViewModel : IMapFrom<Post>
     {
@@ -21,5 +24,7 @@
         public string UserUserName { get; set; }
 
         public ApplicationUser User { get; set; }
+
+        public IEnumerable<CommentViewModel> Comments { get; set; }
     }
 }

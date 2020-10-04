@@ -7,19 +7,22 @@
     using Microsoft.AspNetCore.Mvc;
     using StarForums.Data.Models;
     using StarForums.Services.Data;
+    using StarForums.Web.ViewModels.Comments;
     using StarForums.Web.ViewModels.Home;
     using StarForums.Web.ViewModels.Posts;
 
-    public class PostController : Controller
+    public class PostController : BaseController
     {
         private readonly IPostsService postsService;
         private readonly ICategoriesService categoriesService;
+        private readonly ICommentsService commentsService;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public PostController(IPostsService postsService, ICategoriesService categoriesService, UserManager<ApplicationUser> userManager)
+        public PostController(IPostsService postsService, ICategoriesService categoriesService, ICommentsService commentsService, UserManager<ApplicationUser> userManager)
         {
             this.postsService = postsService;
             this.categoriesService = categoriesService;
+            this.commentsService = commentsService;
             this.userManager = userManager;
         }
 
@@ -27,6 +30,9 @@
         public IActionResult Index(int postId)
         {
             var post = this.postsService.GetById<PostViewModel>(postId);
+            var comments = this.commentsService.GetAll<CommentViewModel>(postId);
+
+            post.Comments = comments;
 
             return this.View(post);
         }
@@ -70,6 +76,33 @@
             await this.postsService.Delete(postId);
 
             return this.Redirect("/" + categoryName);
+        }
+
+        [Route("/{categoryName}/{postId}/AddComment")]
+        [Authorize]
+        public IActionResult AddComment(int postId)
+        {
+            var model = new CommentInputModel() { PostId = postId };
+            return this.View(model);
+        }
+
+        [Route("/{categoryName}/{postId}/AddComment")]
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> AddComment(CommentInputModel model, int postId, string categoryName)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            model.UserId = user.Id;
+
+            await this.commentsService.AddComment(model);
+
+            return this.Redirect($"/{categoryName}/{postId}");
         }
     }
 }

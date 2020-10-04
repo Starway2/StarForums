@@ -5,7 +5,7 @@
     using StarForums.Web.ViewModels.Home;
     using StarForums.Web.ViewModels.Posts;
 
-    public class CategoryController : Controller
+    public class CategoryController : BaseController
     {
         private readonly ICategoriesService categoriesService;
         private readonly IPostsService postsService;

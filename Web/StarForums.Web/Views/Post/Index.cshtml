@@ -7,6 +7,23 @@
                 <td>Posted by: @Model.User.UserName</td>
             </tr>
         </table>
+        <a href="/@Model.CategoryName/@Model.Id/AddComment">Add Comment</a>
         <a href="/@Model.CategoryName/@Model.Id/Delete">Delete</a>
+        <table class="table">
+            @foreach (var comment in Model.Comments)
+            {
+            <tr>
+                <td>
+                    Posted by: @comment.User.UserName
+                </td>
+                <td>
+                    @comment.Content
+                </td>
+                <td>
+                    @comment.CreatedOn
+                </td>
+            </tr>
+            }
+        </table>
     </div>
 
