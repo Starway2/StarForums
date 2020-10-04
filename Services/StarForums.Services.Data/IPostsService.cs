@@ -16,5 +16,7 @@
         IEnumerable<T> GetByCategoryName<T>(string categoryName);
 
         Task CreateAsync(CreatePostInputModel model);
+
+        Task Delete(int postId);
     }
 }

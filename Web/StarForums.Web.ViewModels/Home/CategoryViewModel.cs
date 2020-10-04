@@ -1,6 +1,7 @@
 ﻿namespace StarForums.Web.ViewModels.Home
 {
     using System.Collections.Generic;
+
     using Ganss.XSS;
     using StarForums.Data.Models;
     using StarForums.Services.Mapping;

@@ -62,5 +62,14 @@
 
             return this.Redirect("/{categoryName}");
         }
+
+        [Route("/{categoryName}/{postId}/Delete")]
+        [Authorize]
+        public async Task<IActionResult> Delete(int postId, string categoryName)
+        {
+            await this.postsService.Delete(postId);
+
+            return this.Redirect("/" + categoryName);
+        }
     }
 }

@@ -32,6 +32,14 @@
             await this.repository.SaveChangesAsync();
         }
 
+        public async Task Delete(int postId)
+        {
+            Post post = this.repository.All().Where(x => x.Id == postId).FirstOrDefault();
+
+            this.repository.Delete(post);
+            await this.repository.SaveChangesAsync();
+        }
+
         public IEnumerable<T> GetAll<T>()
         {
             IQueryable<Post> query = this.repository.All();

@@ -16,6 +16,8 @@
 
         public string CategoryName { get; set; }
 
+        public int CategoryId { get; set; }
+
         public string UserUserName { get; set; }
 
         public ApplicationUser User { get; set; }

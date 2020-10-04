@@ -1,9 +1,8 @@
 ﻿namespace StarForums.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using StarForums.Data.Models;
     using StarForums.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {

@@ -1,11 +1,12 @@
 ﻿@{ this.ViewData["Title"] = "Home Page"; }
 @model StarForums.Web.ViewModels.Posts.PostViewModel
 
-    <div>
+    <div class="text-center">
         <table>
             <tr>
                 <td>Posted by: @Model.User.UserName</td>
             </tr>
         </table>
+        <a href="/@Model.CategoryName/@Model.Id/Delete">Delete</a>
     </div>
 
