@@ -2,13 +2,26 @@
 @model StarForums.Web.ViewModels.Home.CategoryListModel
 @{ this.ViewData["Title"] = "Home Page"; }
 
-<div class="text-center">
-    <table class="table">
+<div class="text-center font-16">
+    <table class="table table-bordered rounded-top">
+        <thead class="thead-dark">
+            <tr class="text-sm-center">
+                <th scope="col">Category</th>
+                <th scope="col">Posts</th>
+            </tr>
+        </thead>
         @foreach (var category in Model.Categories)
         {
             <tr>
-                <td><a href="@category.Name">@category.Name</a></td>
-                <td>@category.CleanDescription</td>
+                <td class="align-middle">
+                <div class="link">
+                    <a href="@category.Name">@category.Name</a>
+                </div>
+                    <div>
+                        <span class="small">@category.CleanDescription</span>
+                    </div>
+                </td>
+                <td class="align-middle"style="width: 10%;">@category.Posts.Count()</td>
             </tr>
         }
     </table>

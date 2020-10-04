@@ -1,15 +1,38 @@
 ﻿@model StarForums.Web.ViewModels.Home.CategoryViewModel
 @{ this.ViewData["Title"] = Model.Name; }
 <div class="text-center">
-    <h1>@Model.Name</h1>
-    <h3>@Model.Description</h3>
-
-    <a class="btn btn-primary" href="/@Model.Name/Create">Create new post</a>
-    <table class="table">
+    <div class="mb-2">
+        <div class="justify-content-center">
+            <h3>@Model.Name</h3>
+            <h6>@Model.Description</h6>
+        </div>
+        <div class="align-self-end">
+            <a class="btn btn-sm btn-primary btn-dark" href="/@Model.Name/Create">Create new post</a>
+        </div>
+    </div>
+    <table class="table table-sm table-bordered rounded-lg">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Posts</th>
+                <th scope="col">Latest comment</th>
+                <th scope="col">Replies</th>
+            </tr>
+        </thead>
         @foreach (var post in Model.Posts)
         {
             <tr>
-                <td><a href="/@Model.Name/@post.Id">@post.Title</a></td>
+                <td>
+                    <div><a href="/@Model.Name/@post.Id">@post.Title</a></div>
+                    <div class="small text-muted">by: <a class="text-muted" href="#">@post.UserUserName</a></div>
+                </td>
+                <td>
+                    <div class=""><span style="font-size: 14px">@post.Comments.Last().CreatedOn <br /> by: <a href="#">@post.Comments.Last().User.UserName</a></span></div>
+                </td>
+                <td class="align-middle">
+                    <div>
+                        <span>@post.Comments.Count()</span>
+                    </div>
+                </td>
             </tr>
         }
     </table>

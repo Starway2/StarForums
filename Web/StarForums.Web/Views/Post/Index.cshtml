@@ -1,29 +1,43 @@
-﻿@{ this.ViewData["Title"] = "Home Page"; }
+﻿@{
+    this.ViewData["Title"] = "Home Page";
+    var commentId = 1;
+}
 @model StarForums.Web.ViewModels.Posts.PostViewModel
 
-    <div class="text-center">
-        <table>
-            <tr>
-                <td>Posted by: @Model.User.UserName</td>
+<div>
+    <table class="table table-bordered">
+        <tr class="">
+            <td style="width: 20%" class="text-left p-1 font-12">@Model.CreatedOn.ToString("d-MM-yyyy h:mm", System.Globalization.CultureInfo.InvariantCulture)</td>
+            <td style="width: 80%" class="text-right p-1 font-12">#@commentId</td>
+        </tr>
+        <tr>
+            <td>@Model.UserUserName</td>
+            <td class="p-2">
+                <div class="text-center font-16 font-weight-bold">
+                    @Model.Title
+                </div>
+                <hr class="border-dark m-1" />
+                <div>
+                    @Model.CleanContent
+                </div>
+            </td>
+        </tr>
+        @foreach (var comment in Model.Comments)
+        {
+            commentId++;
+            <tr class="">
+                <td style="width: 20%" class="text-left p-1 font-12">@comment.CreatedOn.ToString("d-MM-yyyy h:mm", System.Globalization.CultureInfo.InvariantCulture)</td>
+                <td style="width: 80%" class="text-right p-1 font-12">#@commentId</td>
             </tr>
-        </table>
-        <a href="/@Model.CategoryName/@Model.Id/AddComment">Add Comment</a>
-        <a href="/@Model.CategoryName/@Model.Id/Delete">Delete</a>
-        <table class="table">
-            @foreach (var comment in Model.Comments)
-            {
             <tr>
-                <td>
-                    Posted by: @comment.User.UserName
-                </td>
-                <td>
-                    @comment.Content
-                </td>
-                <td>
-                    @comment.CreatedOn
+                <td>@comment.UserUsername</td>
+                <td class="p-2">
+                    <div>
+                        @comment.CleanContent
+                    </div>
                 </td>
             </tr>
-            }
-        </table>
-    </div>
+        }
+    </table>
+</div>
 

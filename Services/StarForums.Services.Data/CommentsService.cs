@@ -32,7 +32,7 @@
 
         public IEnumerable<T> GetAll<T>(int postId)
         {
-            return this.repository.All().Where(x => x.PostId == postId).To<T>().ToList();
+            return this.repository.All().Where(x => x.PostId == postId).OrderBy(x => x.CreatedOn).To<T>().ToList();
         }
     }
 }

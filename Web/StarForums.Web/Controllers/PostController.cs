@@ -27,9 +27,15 @@
         }
 
         [Route("/{categoryName}/{postId}")]
-        public IActionResult Index(int postId)
+        public IActionResult Index(int postId, string categoryName)
         {
             var post = this.postsService.GetById<PostViewModel>(postId);
+
+            if (post == null)
+            {
+                return this.Redirect("/" + categoryName);
+            }
+
             var comments = this.commentsService.GetAll<CommentViewModel>(postId);
 
             post.Comments = comments;

@@ -17,6 +17,8 @@
 
         public DateTime CreatedOn { get; set; }
 
+        public string UserUsername { get; set; }
+
         public ApplicationUser User { get; set; }
     }
 }
