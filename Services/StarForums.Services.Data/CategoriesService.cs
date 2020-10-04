@@ -23,14 +23,17 @@
             return query.To<T>().ToList();
         }
 
-        public Category GetById(int id)
+        public T GetById<T>(int id)
         {
-            return this.repository.All().Where(c => c.Id == id).FirstOrDefault();
+            var category = this.repository.All().Where(x => x.Id == id);
+            return category.To<T>().FirstOrDefault();
         }
 
-        public Category GetByName(string name)
+        public T GetByName<T>(string name)
         {
-            return this.repository.All().Where(c => c.Name == name).FirstOrDefault();
+            var category = this.repository.All().Where(x => x.Name.Replace(" ", "-") == name.Replace(" ", "-"));
+
+            return category.To<T>().FirstOrDefault();
         }
     }
 }

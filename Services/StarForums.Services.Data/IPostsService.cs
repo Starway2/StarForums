@@ -2,14 +2,14 @@
 {
     using System.Collections.Generic;
 
-    using StarForums.Data.Models;
-
-    public interface ICategoriesService
+    public interface IPostsService
     {
         IEnumerable<T> GetAll<T>();
 
         T GetById<T>(int id);
 
-        T GetByName<T>(string name);
+        IEnumerable<T> GetByCategoryId<T>(int categoryId);
+
+        IEnumerable<T> GetByCategoryName<T>(string categoryName);
     }
 }

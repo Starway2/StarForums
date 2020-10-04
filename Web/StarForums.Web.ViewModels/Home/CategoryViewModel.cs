@@ -17,6 +17,6 @@
 
         public string Description { get; set; }
 
-        public ICollection<PostViewModel> Posts { get; set; }
+        public IEnumerable<PostViewModel> Posts { get; set; }
     }
 }
