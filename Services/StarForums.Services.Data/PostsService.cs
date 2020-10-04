@@ -2,10 +2,11 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-
+    using System.Threading.Tasks;
     using StarForums.Data.Common.Repositories;
     using StarForums.Data.Models;
     using StarForums.Services.Mapping;
+    using StarForums.Web.ViewModels.Posts;
 
     public class PostsService : IPostsService
     {
@@ -14,6 +15,20 @@
         public PostsService(IDeletableEntityRepository<Post> repository)
         {
             this.repository = repository;
+        }
+
+        public async Task CreateAsync(CreatePostInputModel model)
+        {
+            var post = new Post()
+            {
+                Title = model.Title,
+                CategoryId = model.CategoryId,
+                Content = model.Content,
+                UserId = model.UserId,
+            };
+
+            await this.repository.AddAsync(post);
+            await this.repository.SaveChangesAsync();
         }
 
         public IEnumerable<T> GetAll<T>()

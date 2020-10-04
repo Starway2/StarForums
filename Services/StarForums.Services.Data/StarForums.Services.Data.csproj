@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\StarForums.Data.Common\StarForums.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\StarForums.Data.Models\StarForums.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Web\StarForums.Web.ViewModels\StarForums.Web.ViewModels.csproj" />
     <ProjectReference Include="..\StarForums.Services.Mapping\StarForums.Services.Mapping.csproj" />
   </ItemGroup>
 

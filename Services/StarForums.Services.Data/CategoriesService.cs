@@ -31,9 +31,9 @@
 
         public T GetByName<T>(string name)
         {
-            var category = this.repository.All().Where(x => x.Name.Replace(" ", "-") == name.Replace(" ", "-"));
+            var category = this.repository.All().Where(x => x.Name.Replace(" ", "-") == name.Replace(" ", "-")).To<T>().FirstOrDefault();
 
-            return category.To<T>().FirstOrDefault();
+            return category;
         }
     }
 }

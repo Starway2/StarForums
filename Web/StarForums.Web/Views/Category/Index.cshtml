@@ -1,15 +1,16 @@
 ﻿@model StarForums.Web.ViewModels.Home.CategoryViewModel
+@{ this.ViewData["Title"] = Model.Name; }
+<div class="text-center">
+    <h1>@Model.Name</h1>
+    <h3>@Model.Description</h3>
 
-    <div class="text-center">
-        <h1>@Model.Name</h1>
-        <h3>@Model.Description</h3>
-
-        <table class="table">
-            @foreach(var post in Model.Posts)
-            {
-                <tr>
-                    <td>@post.Title</td>
-                </tr>
-            }
-        </table>
-    </div>
+    <a class="btn btn-primary" href="/@Model.Name/Create">Create new post</a>
+    <table class="table">
+        @foreach (var post in Model.Posts)
+        {
+            <tr>
+                <td>@post.Title</td>
+            </tr>
+        }
+    </table>
+</div>
