@@ -78,3 +78,15 @@ body {
     .link:hover {
         text-decoration: none;
     }
+.border-1 {
+    border: 1px solid #343a40;
+}
+.tox-tinymce, .tox-menubar, .tox-statusbar, .tox-toolbar-overlord, tox-toolbar__group {
+    border-color: #343a40!important;
+}
+.post-user{
+    width: 15%;
+}
+.post-content{
+    width: 85%;
+}

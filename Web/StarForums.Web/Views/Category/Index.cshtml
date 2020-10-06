@@ -25,8 +25,15 @@
                     <div><a href="/@Model.Name/@post.Id">@post.Title</a></div>
                     <div class="small text-muted">by: <a class="text-muted" href="#">@post.UserUserName</a></div>
                 </td>
-                <td>
-                    <div class=""><span style="font-size: 14px">@post.Comments.Last().CreatedOn <br /> by: <a href="#">@post.Comments.Last().User.UserName</a></span></div>
+                <td class="align-middle">
+                    @if (post.Comments.Any())
+                    {
+                        <div class=""><span style="font-size: 14px">@post.Comments.Last().CreatedOn <br /> by: <a href="#">@post.Comments.Last().User.UserName</a></span></div>
+                    }
+                    else
+                    {
+                        <div><span style="font-size: 14px">Not comments yet</span></div>
+                    }
                 </td>
                 <td class="align-middle">
                     <div>
