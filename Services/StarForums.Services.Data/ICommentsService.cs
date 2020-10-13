@@ -9,6 +9,8 @@
     {
         IEnumerable<T> GetAll<T>(int postId);
 
+        IEnumerable<T> GetByUserId<T>(string userId);
+
         Task AddComment(CommentInputModel model);
     }
 }

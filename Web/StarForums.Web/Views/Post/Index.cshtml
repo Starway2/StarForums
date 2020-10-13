@@ -14,7 +14,7 @@
         </div>
         <div class="border border-1 border-dark d-inline-flex w-100 text-center">
             <div class="d-inline-block p-1 align-top text-center border-right border-dark post-user">
-                <span class="text-center">@Model.UserUserName</span>
+                <span class="text-center"><a asp-controller="Profile" asp-action="Index" asp-route-u="@Model.UserUserName">@Model.UserUserName</a></span>
             </div>
             <div class="d-inline-block text-center post-content p-1">
                 <span class="p-2 font-weight-bolder font-16">@Model.Title</span>

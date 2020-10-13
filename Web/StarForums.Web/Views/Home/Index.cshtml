@@ -6,16 +6,16 @@
     <table class="table table-bordered rounded-top">
         <thead class="thead-dark">
             <tr class="text-sm-center">
-                <th scope="col">Category</th>
-                <th scope="col">Posts</th>
+                <th scope="col" class="p-1 font-weight-bold">Category</th>
+                <th scope="col" class="p-1 font-weight-bold">Posts</th>
             </tr>
         </thead>
         @foreach (var category in Model.Categories)
         {
             <tr>
                 <td class="align-middle">
-                <div class="link">
-                    <a href="@category.Name">@category.Name</a>
+                <div class="d-inline-block">
+                    <a href="@category.Name" class="text-dark"><h5 class="p-0 m-0">@category.Name</h5></a>
                 </div>
                     <div>
                         <span class="small">@category.CleanDescription</span>

@@ -30,9 +30,8 @@
             await this.repository.SaveChangesAsync();
         }
 
-        public IEnumerable<T> GetAll<T>(int postId)
-        {
-            return this.repository.All().Where(x => x.PostId == postId).OrderBy(x => x.CreatedOn).To<T>().ToList();
-        }
+        public IEnumerable<T> GetAll<T>(int postId) => this.repository.All().Where(x => x.PostId == postId).OrderBy(x => x.CreatedOn).To<T>().ToList();
+
+        public IEnumerable<T> GetByUserId<T>(string userId) => this.repository.All().Where(x => x.UserId == userId).To<T>().ToList();
     }
 }

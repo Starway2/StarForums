@@ -1,0 +1,22 @@
+﻿@model StarForums.Web.ViewModels.Profile.ProfileViewModel
+@{
+}
+
+<div class="">
+    <h2>@Model.Username</h2>
+    <div>
+        <img src="@Model.AvatarUrl" />
+    </div>
+    <div>
+        <span>Created on: @Model.CreatedOn</span>
+    </div>
+    <div>
+        <span>Total comments: @Model.CommentsCount</span>
+    </div>
+    <div>
+        <span>Total posts: @Model.PostsCount</span>
+    </div>
+    <div>
+        <span>Email: @Model.Email</span>
+    </div>
+</div>

@@ -40,32 +40,14 @@
             await this.repository.SaveChangesAsync();
         }
 
-        public IEnumerable<T> GetAll<T>()
-        {
-            IQueryable<Post> query = this.repository.All();
+        public IEnumerable<T> GetAll<T>() => this.repository.All().To<T>().ToList();
 
-            return query.To<T>().ToList();
-        }
+        public IEnumerable<T> GetByCategoryId<T>(int categoryId) => this.repository.All().Where(x => x.Category.Id == categoryId).To<T>().ToList();
 
-        public IEnumerable<T> GetByCategoryId<T>(int categoryId)
-        {
-            var posts = this.repository.All().Where(x => x.Category.Id == categoryId);
+        public IEnumerable<T> GetByCategoryName<T>(string categoryName) => this.repository.All().Where(x => x.Category.Name.Replace(" ", "-") == categoryName.Replace(" ", "-")).To<T>().ToList();
 
-            return posts.To<T>().ToList();
-        }
+        public T GetById<T>(int id) => this.repository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
 
-        public IEnumerable<T> GetByCategoryName<T>(string categoryName)
-        {
-            var posts = this.repository.All().Where(x => x.Category.Name.Replace(" ", "-") == categoryName.Replace(" ", "-"));
-
-            return posts.To<T>().ToList();
-        }
-
-        public T GetById<T>(int id)
-        {
-            var post = this.repository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
-
-            return post;
-        }
+        public IEnumerable<T> GetByUserId<T>(string userId) => this.repository.All().Where(x => x.UserId == userId).To<T>().ToList();
     }
 }

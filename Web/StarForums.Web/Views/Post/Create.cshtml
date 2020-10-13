@@ -1,17 +1,16 @@
 ﻿@{ this.ViewData["Title"] = "Create new post"; }
 @model StarForums.Web.ViewModels.Posts.CreatePostInputModel
 <div>
-    <form method="post">
+    <form method="post" class="text-center">
         <h4>Create a new post.</h4>
         <hr />
         <div asp-validation-summary="All" class="text-danger"></div>
-        <div class="form-group">
+        <div class="form-group col-4 mx-auto ">
             <label asp-for="Title"></label>
             <input asp-for="Title" class="form-control" />
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Content"></label>
             <textarea id="text-editor" placeholder="Add comment" class="border-dark" asp-for="Content"></textarea>
             <span asp-validation-for="Content" class="text-danger"></span>
         </div>
