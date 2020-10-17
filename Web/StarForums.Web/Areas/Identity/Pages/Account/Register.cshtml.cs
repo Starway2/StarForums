@@ -80,7 +80,8 @@
             this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (this.ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = this.Input.Username, Email = this.Input.Email };
+                // TODO: Change AvatarURL
+                var user = new ApplicationUser { UserName = this.Input.Username, Email = this.Input.Email, AvatarUrl = "https://res.cloudinary.com/dbda9nvbi/image/upload/v1598512451/noavatar_mxhhu0.jpg" };
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
                 if (result.Succeeded)
                 {
