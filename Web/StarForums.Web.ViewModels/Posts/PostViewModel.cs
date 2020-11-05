@@ -26,6 +26,8 @@
 
         public string UserUserName { get; set; }
 
+        public int UserPostsCount { get; set; }
+
         public ApplicationUser User { get; set; }
 
         public IEnumerable<CommentViewModel> Comments { get; set; }

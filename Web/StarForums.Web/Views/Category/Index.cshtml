@@ -7,7 +7,14 @@
             <h6>@Model.Description</h6>
         </div>
         <div class="align-self-end">
-            <a class="btn btn-sm btn-primary btn-dark" href="/@Model.Name/Create">Create new post</a>
+            @if (this.User.Identity.IsAuthenticated)
+            {
+                <a class="btn btn-sm btn-primary btn-dark" href="/@Model.Name/Create">Create new post</a>
+            }
+            else
+            {
+                <span class="text-dark">Want to add a post? Please <a href="/Login" class="text-success font-weight-bold">sign-in</a> or create a <a href="/Register" class="text-success font-weight-bold">new account</a>.</span>
+            }
         </div>
     </div>
     <table class="table table-sm table-bordered rounded-lg">
@@ -23,16 +30,16 @@
             <tr>
                 <td>
                     <div><a href="/@Model.Name/@post.Id">@post.Title</a></div>
-                    <div class="small text-muted">by: <a class="text-muted" href="#">@post.UserUserName</a></div>
+                    <div class="small text-muted ">posted by: <a class="text-muted font-weight-bold" asp-controller="Profile" asp-action="Index" asp-route-u="@post.UserUserName">@post.UserUserName</a></div>
                 </td>
                 <td class="align-middle">
                     @if (post.Comments.Any())
                     {
-                        <div class=""><span style="font-size: 14px">@post.Comments.Last().CreatedOn <br /> by: <a href="#">@post.Comments.Last().User.UserName</a></span></div>
+                        <div class=""><span style="font-size: 14px">@post.Comments.Last().CreatedOn<br />by: <a asp-controller="Profile" asp-action="Index" asp-route-u="@post.Comments.Last().UserUsername">@post.Comments.Last().UserUsername</a></span></div>
                     }
                     else
                     {
-                        <div><span style="font-size: 14px">Not comments yet</span></div>
+                        <div><span style="font-size: 14px">No comments yet</span></div>
                     }
                 </td>
                 <td class="align-middle">

@@ -1,9 +1,10 @@
 ﻿namespace StarForums.Web.ViewModels.Comments
 {
+    using System;
+
     using Ganss.XSS;
     using StarForums.Data.Models;
     using StarForums.Services.Mapping;
-    using System;
 
     public class CommentViewModel : IMapFrom<Comment>
     {
@@ -18,6 +19,8 @@
         public DateTime CreatedOn { get; set; }
 
         public string UserUsername { get; set; }
+
+        public int UserPostsCount { get; set; }
 
         public ApplicationUser User { get; set; }
     }
