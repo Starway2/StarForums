@@ -89,9 +89,9 @@
         [Authorize]
         public async Task<IActionResult> Delete(int postId, string categoryName)
         {
-            var post = this.postsService.GetById<Post>(postId);
+            var post = this.postsService.GetById<PostViewModel>(postId);
 
-            if (this.userManager.GetUserId(this.User) == post.UserId || this.User.IsInRole("Administrator"))
+            if (this.userManager.GetUserId(this.User) == post.User.Id || this.User.IsInRole("Administrator"))
             {
                 await this.postsService.Delete(postId);
 

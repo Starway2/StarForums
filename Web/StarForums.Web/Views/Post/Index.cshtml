@@ -17,10 +17,18 @@
                 <span class="font-12">Join date: @Model.User.CreatedOn.ToString("dd.MM.yyyy")</span>
                 <span class="font-12">Total posts: @Model.User.Posts.Count</span>
             </div>
-            <div class="d-inline-block text-center post-content p-1">
+            <div class="d-inline-block text-center post-content p-1 position-relative">
                 <span class="p-2 font-weight-bolder font-16">@Model.Title</span>
                 <hr class="border-dark m-1 mx-2 p-0" />
-                <div class="p-0 m-2 text-left"><p class="m-1">@Html.Raw(Model.CleanContent)</p></div>
+                <div class="p-0 m-2 text-left">
+                    <p class="m-1 d-inline-block">@Html.Raw(Model.CleanContent)</p>
+                </div>
+                @if (User.Identity.Name == Model.UserUserName || User.IsInRole("Moderator") || User.IsInRole("Administrator"))
+                {
+                    <div class="align-bot-right d-inline-block position-absolute m-2">
+                        <a class="btn btn-sm btn-dark" href="/@Model.CategoryName/@Model.Id/Delete">Delete</a>
+                    </div>
+                }
             </div>
         </div>
     </div>
