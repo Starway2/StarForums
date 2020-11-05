@@ -23,7 +23,8 @@
 
             if (category == null)
             {
-                return this.NotFound();
+                // TODO: Make 404 page.
+                return this.Redirect("/");
             }
 
             var posts = this.postsService.GetByCategoryName<PostViewModel>(category.Name);

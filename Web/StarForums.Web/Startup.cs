@@ -45,10 +45,6 @@
                         options.CheckConsentNeeded = context => true;
                         options.MinimumSameSitePolicy = SameSiteMode.None;
                     });
-            services.ConfigureApplicationCookie(options =>
-            {
-                options.LoginPath = "/Login";
-            });
 
             services.AddControllersWithViews(
                 options =>
@@ -86,7 +82,6 @@
                 new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
 
-            app.UseStatusCodePagesWithReExecute("/Error/Index/{0}");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -94,6 +89,7 @@
             }
             else
             {
+                app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
 

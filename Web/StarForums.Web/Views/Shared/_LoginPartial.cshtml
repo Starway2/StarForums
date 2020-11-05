@@ -8,7 +8,11 @@
     @if (this.SignInManager.IsSignedIn(this.User))
     {
         <li class="nav-item">
-            <a class="nav-link text-light font-weight-bold align-middle" asp-controller="Profile" asp-action="Index">@(this.User.Identity.Name)</a>
+<<<<<<< HEAD
+            <a class="nav-link text-light font-weight-bold align-middle" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @(this.User.Identity.Name)!</a>
+=======
+            <a class="nav-link text-light font-weight-bold align-middle" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@(this.User.Identity.Name)!</a>
+>>>>>>> parent of 95f37c7... Added delete button to post
         </li>
         if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {

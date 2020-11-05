@@ -47,11 +47,6 @@
         [Authorize]
         public IActionResult Create(string categoryName)
         {
-            if (!this.User.Identity.IsAuthenticated)
-            {
-                return this.Redirect("/Login");
-            }
-
             var model = new CreatePostInputModel();
 
             var test = this.categoriesService.GetByName<CategoryViewModel>(categoryName);
@@ -66,11 +61,6 @@
         [HttpPost]
         public async Task<IActionResult> Create(CreatePostInputModel input)
         {
-            if (!this.User.Identity.IsAuthenticated)
-            {
-                return this.Redirect("/Login");
-            }
-
             if (!this.ModelState.IsValid)
             {
                 return this.View(input);
@@ -89,16 +79,20 @@
         [Authorize]
         public async Task<IActionResult> Delete(int postId, string categoryName)
         {
-            var post = this.postsService.GetById<PostViewModel>(postId);
+<<<<<<< HEAD
+            await this.postsService.Delete(postId);
+=======
+            var post = this.postsService.GetById<Post>(postId);
 
-            if (this.userManager.GetUserId(this.User) == post.User.Id || this.User.IsInRole("Administrator"))
+            if (this.userManager.GetUserId(this.User) == post.UserId || this.User.IsInRole("Administrator"))
             {
                 await this.postsService.Delete(postId);
 
                 return this.Redirect("/" + categoryName);
             }
+>>>>>>> parent of 95f37c7... Added delete button to post
 
-            return this.NotFound();
+            return this.Redirect("/" + categoryName);
         }
 
         [Route("/{categoryName}/{postId}/AddComment")]
