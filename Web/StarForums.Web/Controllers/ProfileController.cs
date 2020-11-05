@@ -28,7 +28,31 @@
 
         public async Task<IActionResult> Index(string u)
         {
+            if (this.User.Identity.IsAuthenticated)
+            {
+                if (u == this.User.Identity.Name)
+                {
+                    return this.Redirect("/Profile");
+                }
+
+                if (string.IsNullOrEmpty(u))
+                {
+                    u = this.User.Identity.Name;
+                }
+            }
+
+            if (u == null)
+            {
+                return this.Redirect("/Login");
+            }
+
             var user = await this.userManager.FindByNameAsync(u);
+
+            if (user == null)
+            {
+                return this.NotFound();
+            }
+
             var posts = this.postsService.GetByUserId<PostViewModel>(user.Id);
             var comments = this.commentsService.GetByUserId<CommentViewModel>(user.Id);
             var model = this.service.GetProfileByUserId<ProfileViewModel>(user.Id);
@@ -37,6 +61,6 @@
             model.PostsCount = posts.Count();
 
             return this.View(model);
-            }
+        }
     }
 }

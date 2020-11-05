@@ -4,9 +4,7 @@
 }
 @model StarForums.Web.ViewModels.Posts.PostViewModel
 
-
-
-<div class="text-center">
+<div class="text-center pt-2">
     <div class="mb-2">
         <div class="bg-dark overflow-hidden">
             <span class="d-inline float-left p-1 text-light font-12">@Model.CreatedOn</span>
@@ -14,7 +12,10 @@
         </div>
         <div class="border border-1 border-dark d-inline-flex w-100 text-center">
             <div class="d-inline-block p-1 align-top text-center border-right border-dark post-user">
-                <span class="text-center"><a asp-controller="Profile" asp-action="Index" asp-route-u="@Model.UserUserName">@Model.UserUserName</a></span>
+                <span class="text-center font-weight-bold text-dark"><a asp-controller="Profile" asp-action="Index" asp-route-u="@Model.UserUserName" class="text-dark">@Model.UserUserName</a></span>
+                <img src="@Model.User.AvatarUrl" class="img-thumbnail my-1" />
+                <span class="font-12">Join date: @Model.User.CreatedOn.ToString("dd.MM.yyyy")</span>
+                <span class="font-12">Total posts: @Model.User.Posts.Count</span>
             </div>
             <div class="d-inline-block text-center post-content p-1">
                 <span class="p-2 font-weight-bolder font-16">@Model.Title</span>
@@ -23,25 +24,42 @@
             </div>
         </div>
     </div>
-    @foreach (var comment in Model.Comments)
+    @if (Model.Comments.Any())
     {
-        commentId++;
-        <div class="mb-2">
-            <div class="bg-dark overflow-hidden">
-                <span class="d-inline float-left p-1 text-light font-12">@comment.CreatedOn</span>
-                <span class="d-inline float-right p-1 text-light font-12">#@commentId</span>
-            </div>
-            <div class="border border-1 border-dark d-inline-flex w-100 text-center">
-                <div class="d-inline-block p-1 align-top text-center border-right border-dark post-user">
-                    <img src="@comment.User.AvatarUrl"/>
-                    <span class="text-center"><a asp-controller="Profile" asp-action="Index" asp-route-u="@comment.UserUsername">@comment.UserUsername</a></span>
+        @foreach (var comment in Model.Comments)
+        {
+            commentId++;
+            <div class="mb-2">
+                <div class="bg-dark overflow-hidden">
+                    <span class="d-inline float-left p-1 text-light font-12">@comment.CreatedOn</span>
+                    <span class="d-inline float-right p-1 text-light font-12">#@commentId</span>
                 </div>
-                <div class="d-inline-block text-center post-content p-1">
-                    <div class="p-0 m-2 text-left"><p class="m-1">@Html.Raw(comment.CleanContent)</p></div>
+                <div class="border border-1 border-dark d-inline-flex w-100 text-center text-dark">
+                    <div class="d-inline-block p-1 align-top text-center border-right border-dark post-user">
+                        <span class="text-center font-weight-bold"><a asp-controller="Profile" asp-action="Index" asp-route-u="@comment.UserUsername" class="text-dark">@comment.UserUsername</a></span>
+                        <img src="@comment.User.AvatarUrl" class="img-thumbnail my-1" />
+                        <span class="font-12">Join date: @comment.User.CreatedOn.ToString("dd.MM.yyyy")</span>
+                        <span class="font-12">Total posts: @comment.User.Posts.Count</span>
+                    </div>
+                    <div class="d-inline-block text-center post-content p-1">
+                        <div class="p-0 m-2 text-left"><p class="m-1">@Html.Raw(comment.CleanContent)</p></div>
+                    </div>
                 </div>
             </div>
-        </div>
+        }
     }
-    <a href="/@Model.CategoryName/@Model.Id/AddComment" class="btn btn-primary btn-dark m-0">Add comment</a>
+    else
+    {
+        <h5 class="text-dark mt-4">Нo one has commented yet. Be the first to comment!</h5>
+    }
+
+    @if (this.User.Identity.IsAuthenticated)
+    {
+        <a href="/@Model.CategoryName/@Model.Id/AddComment" class="btn btn-primary btn-dark m-0">Add comment</a>
+    }
+    else
+    {
+        <span class="text-dark">Want to add a comment? Please <a href="/Login" class="text-danger">sign-in</a> or create a <a href="/Register">new account</a>.</span>
+    }
 </div>
 
