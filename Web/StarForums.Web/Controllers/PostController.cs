@@ -5,6 +5,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using StarForums.Common;
     using StarForums.Data.Models;
     using StarForums.Services.Data;
     using StarForums.Web.ViewModels.Comments;
@@ -64,7 +65,7 @@
         [Route("/{categoryName}/Create")]
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Create(CreatePostInputModel input)
+        public async Task<IActionResult> Create(CreatePostInputModel input, string categoryName)
         {
             if (!this.User.Identity.IsAuthenticated)
             {
@@ -80,9 +81,9 @@
 
             input.UserId = user.Id;
 
-            await this.postsService.CreateAsync(input);
+            var postId = await this.postsService.CreateAsync(input);
 
-            return this.Redirect("/{categoryName}");
+            return this.Redirect($"/{categoryName}/{postId}");
         }
 
         [Route("/{categoryName}/{postId}/Delete")]
@@ -91,14 +92,14 @@
         {
             var post = this.postsService.GetById<PostViewModel>(postId);
 
-            if (this.userManager.GetUserId(this.User) == post.User.Id || this.User.IsInRole("Administrator"))
+            if (this.userManager.GetUserId(this.User) == post.User.Id || this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.ModeratorRoleName))
             {
-                await this.postsService.Delete(postId);
+                await this.postsService.DeleteAsync(postId);
 
                 return this.Redirect("/" + categoryName);
             }
 
-            return this.NotFound();
+            return this.Redirect($"/{categoryName}/{postId}");
         }
 
         [Route("/{categoryName}/{postId}/AddComment")]
@@ -126,6 +127,39 @@
             await this.commentsService.AddComment(model);
 
             return this.Redirect($"/{categoryName}/{postId}");
+        }
+
+        [Route("/{categoryName}/{postId}/Edit")]
+        [Authorize]
+        public IActionResult Edit(int postId)
+        {
+
+            var post = this.postsService.GetById<PostEditViewModel>(postId);
+            var currentUserId = this.userManager.GetUserId(this.User);
+
+            post.ReturnUrl = this.HttpContext.Request.Headers["Referer"].ToString();
+
+            if (post.UserId == currentUserId || this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.ModeratorRoleName))
+            {
+                return this.View(post);
+            }
+
+            return this.Redirect("/");
+        }
+
+        [Route("/{categoryName}/{postId}/Edit")]
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Edit(PostEditViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                this.View(model);
+            }
+
+            await this.postsService.EditAsync(model.Id, model.Title, model.Content);
+
+            return this.Redirect("/{categoryName}/" + model.Id);
         }
     }
 }

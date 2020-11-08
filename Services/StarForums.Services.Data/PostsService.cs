@@ -18,7 +18,7 @@
             this.repository = repository;
         }
 
-        public async Task CreateAsync(CreatePostInputModel model)
+        public async Task<int> CreateAsync(CreatePostInputModel model)
         {
             var post = new Post()
             {
@@ -30,13 +30,25 @@
 
             await this.repository.AddAsync(post);
             await this.repository.SaveChangesAsync();
+
+            return post.Id;
         }
 
-        public async Task Delete(int postId)
+        public async Task DeleteAsync(int postId)
         {
             Post post = this.repository.All().Where(x => x.Id == postId).FirstOrDefault();
 
             this.repository.Delete(post);
+            await this.repository.SaveChangesAsync();
+        }
+
+        public async Task EditAsync(int postId, string title, string content)
+        {
+            var post = this.repository.All().Where(x => x.Id == postId).FirstOrDefault();
+            post.Content = content;
+            post.Title = title;
+
+            this.repository.Update(post);
             await this.repository.SaveChangesAsync();
         }
 

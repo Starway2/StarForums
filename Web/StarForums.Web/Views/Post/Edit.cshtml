@@ -1,0 +1,24 @@
+﻿@model StarForums.Web.ViewModels.Posts.PostEditViewModel
+@{
+    this.ViewData["Title"] = Model.Title;
+}
+
+<div>
+    <form method="post" class="text-center">
+        <h4>Editing post @Model.Title</h4>
+        <hr />
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group col-4 mx-auto ">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control" value="@Model.Title"/>
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <textarea id="text-editor" placeholder="Post content" class="border-dark" asp-for="Content">@Model.CleanContent</textarea>
+            <span asp-validation-for="Content" class="text-danger"></span>
+        </div>
+        <input type="hidden" asp-for="Id" value="@Model.Id" />
+        <button type="submit" class="btn btn-dark btn-sm mb-2">Finish editing</button><br />
+        <a href="@Model.ReturnUrl" class="btn btn-sm btn-outline-dark">Cancel</a>
+    </form>
+</div>

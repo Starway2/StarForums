@@ -17,8 +17,10 @@
 
         IEnumerable<T> GetByUserId<T>(string userId);
 
-        Task CreateAsync(CreatePostInputModel model);
+        Task<int> CreateAsync(CreatePostInputModel model);
 
-        Task Delete(int postId);
+        Task DeleteAsync(int postId);
+
+        Task EditAsync(int postId, string title, string content);
     }
 }

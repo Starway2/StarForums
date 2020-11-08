@@ -14,8 +14,9 @@
             <div class="d-inline-block p-1 align-top text-center border-right border-dark post-user">
                 <span class="text-center font-weight-bold text-dark"><a asp-controller="Profile" asp-action="Index" asp-route-u="@Model.UserUserName" class="text-dark">@Model.UserUserName</a></span>
                 <img src="@Model.User.AvatarUrl" class="img-thumbnail my-1" />
-                <span class="font-12">Join date: @Model.User.CreatedOn.ToString("dd.MM.yyyy")</span>
-                <span class="font-12">Total posts: @Model.User.Posts.Count</span>
+                <span class="font-12">Join date: @Model.User.CreatedOn.ToString("dd.MM.yyyy")</span><br>
+                <span class="font-12">Total posts: @Model.User.Posts.Count</span><br>
+                <span class="font-12">Total comments: @Model.User.Comments.Count</span>
             </div>
             <div class="d-inline-block text-center post-content p-1 position-relative">
                 <span class="p-2 font-weight-bolder font-16">@Model.Title</span>
@@ -25,9 +26,10 @@
                 </div>
                 @if (User.Identity.Name == Model.UserUserName || User.IsInRole("Moderator") || User.IsInRole("Administrator"))
                 {
-                    <div class="align-bot-right d-inline-block position-absolute m-2">
-                        <a class="btn btn-sm btn-dark" href="/@Model.CategoryName/@Model.Id/Delete">Delete</a>
-                    </div>
+            <div class="align-bot-right d-inline-block position-absolute m-2">
+                <a class="btn btn-sm btn-dark" href="/@Model.CategoryName/@Model.Id/Edit">Edit</a>
+                <a class="btn btn-sm btn-dark" href="/@Model.CategoryName/@Model.Id/Delete">Delete</a>
+            </div>
                 }
             </div>
         </div>
@@ -47,7 +49,8 @@
                         <span class="text-center font-weight-bold"><a asp-controller="Profile" asp-action="Index" asp-route-u="@comment.UserUsername" class="text-dark">@comment.UserUsername</a></span>
                         <img src="@comment.User.AvatarUrl" class="img-thumbnail my-1" />
                         <span class="font-12">Join date: @comment.User.CreatedOn.ToString("dd.MM.yyyy")</span>
-                        <span class="font-12">Total posts: @comment.User.Posts.Count</span>
+                        <span class="font-12">Total posts: @comment.User.Posts.Count</span><br />
+                        <span class="font-12">Total comments: @comment.User.Comments.Count</span>
                     </div>
                     <div class="d-inline-block text-center post-content p-1">
                         <div class="p-0 m-2 text-left"><p class="m-1">@Html.Raw(comment.CleanContent)</p></div>
