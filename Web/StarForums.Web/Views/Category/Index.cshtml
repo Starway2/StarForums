@@ -31,6 +31,7 @@
                 <td>
                     <div><a href="/@Model.Name/@post.Id">@post.Title</a></div>
                     <div class="small text-muted ">posted by: <a class="text-muted font-weight-bold" asp-controller="Profile" asp-action="Index" asp-route-u="@post.UserUserName">@post.UserUserName</a></div>
+                    <div class="small text-muted ">@post.CreatedOn.ToString("dd-MMM-yyyy hh:mm tt")</div>
                 </td>
                 <td class="align-middle">
                     @if (post.Comments.Any())

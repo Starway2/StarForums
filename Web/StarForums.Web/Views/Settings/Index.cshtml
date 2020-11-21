@@ -1,14 +1,20 @@
 ﻿@model StarForums.Web.ViewModels.Settings.SettingsListViewModel
 
-@{
-    this.ViewData["Title"] = "Settings";
-}
+@{ this.ViewData["Title"] = "Settings"; }
 
 <h1>@this.ViewData["Title"]</h1>
 
-@foreach (var setting in this.Model.Settings)
-{
-    <div>@setting.Id: @setting.NameAndValue</div>
-}
-
-<a asp-action="InsertSetting" class="btn btn-primary">Insert new</a>
+<div>
+    <div>
+        <form class="md-form">
+                <div class="input-group col-4">
+                    <div>
+                        <img id="blah" src="#" alt="your image" />
+                        <input type="file" class="d-none" id="image">
+                        <label class="btn btn-sm btn-dark m-2" for="image">Choose file</label>
+                        <span class="btn btn-sm btn-dark m-2">Upload</span>
+                    </div>
+            </div>
+        </form>
+    </div>
+</div>

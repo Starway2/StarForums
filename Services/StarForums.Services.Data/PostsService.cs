@@ -56,7 +56,15 @@
 
         public IEnumerable<T> GetByCategoryId<T>(int categoryId) => this.repository.All().Where(x => x.Category.Id == categoryId).To<T>().ToList();
 
-        public IEnumerable<T> GetByCategoryName<T>(string categoryName) => this.repository.All().Where(x => x.Category.Name.Replace(" ", "-") == categoryName.Replace(" ", "-")).To<T>().ToList();
+        public IEnumerable<T> GetByCategoryName<T>(string categoryName)
+        {
+            return this.repository
+                .All()
+                .Where(x => x.Category.Name.Replace(" ", "-") == categoryName.Replace(" ", "-"))
+                .OrderByDescending(x => x.CreatedOn)
+                .To<T>()
+                .ToList();
+        }
 
         public T GetById<T>(int id) => this.repository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
 

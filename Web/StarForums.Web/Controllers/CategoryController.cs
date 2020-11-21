@@ -1,5 +1,7 @@
 ﻿namespace StarForums.Web.Controllers
 {
+    using System.Linq;
+
     using Microsoft.AspNetCore.Mvc;
     using StarForums.Services.Data;
     using StarForums.Web.ViewModels.Home;
@@ -26,8 +28,9 @@
                 return this.NotFound();
             }
 
-            var posts = this.postsService.GetByCategoryName<PostViewModel>(category.Name);
-            category.Posts = posts;
+            category.Posts = this.postsService.GetByCategoryName<PostViewModel>(category.Name);
+
+            category.Posts = category.Posts.OrderByDescending(x => x.CreatedOn);
 
             return this.View(category);
         }
