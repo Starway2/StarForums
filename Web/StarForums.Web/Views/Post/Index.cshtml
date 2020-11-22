@@ -13,7 +13,7 @@
         <div class="border border-1 border-dark d-inline-flex w-100 text-center">
             <div class="d-inline-block p-1 align-top text-center border-right border-dark post-user">
                 <span class="text-center font-weight-bold text-dark"><a asp-controller="Profile" asp-action="Index" asp-route-u="@Model.UserUserName" class="text-dark">@Model.UserUserName</a></span>
-                <img src="@Model.User.AvatarUrl" class="img-thumbnail my-1" />
+                <img src="@Model.UserAvatarUrl" class="img-thumbnail my-1" />
                 <span class="font-12">Join date: @Model.User.CreatedOn.ToString("dd.MM.yyyy")</span><br>
                 <span class="font-12">Total posts: @Model.User.Posts.Count</span><br>
                 <span class="font-12">Total comments: @Model.User.Comments.Count</span>
@@ -47,7 +47,7 @@
                 <div class="border border-1 border-dark d-inline-flex w-100 text-center text-dark">
                     <div class="d-inline-block p-1 align-top text-center border-right border-dark post-user">
                         <span class="text-center font-weight-bold"><a asp-controller="Profile" asp-action="Index" asp-route-u="@comment.UserUsername" class="text-dark">@comment.UserUsername</a></span>
-                        <img src="@comment.User.AvatarUrl" class="img-thumbnail my-1" />
+                        <img src="@comment.UserAvatarUrl" class="img-thumbnail my-1" />
                         <span class="font-12">Join date: @comment.User.CreatedOn.ToString("dd.MM.yyyy")</span>
                         <span class="font-12">Total posts: @comment.User.Posts.Count</span><br />
                         <span class="font-12">Total comments: @comment.User.Comments.Count</span>

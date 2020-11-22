@@ -13,6 +13,20 @@
   <ItemGroup>
     <Compile Remove="Migrations\20201004080158_AddUserIdtoPostAndComment.cs" />
     <Compile Remove="Migrations\20201004080158_AddUserIdtoPostAndComment.Designer.cs" />
+    <Compile Remove="Migrations\20201121092006_AddSettings.cs" />
+    <Compile Remove="Migrations\20201121092006_AddSettings.Designer.cs" />
+    <Compile Remove="Migrations\20201121094349_AddSettings.cs" />
+    <Compile Remove="Migrations\20201121094349_AddSettings.Designer.cs" />
+    <Compile Remove="Migrations\20201121110204_AddSettings.cs" />
+    <Compile Remove="Migrations\20201121110204_AddSettings.Designer.cs" />
+    <Compile Remove="Migrations\20201121110405_AddSettings.cs" />
+    <Compile Remove="Migrations\20201121110405_AddSettings.Designer.cs" />
+    <Compile Remove="Migrations\20201121111923_AddSettings.cs" />
+    <Compile Remove="Migrations\20201121111923_AddSettings.Designer.cs" />
+    <Compile Remove="Migrations\20201121172836_RemoveAvatarFromApplicationUser.cs" />
+    <Compile Remove="Migrations\20201121172836_RemoveAvatarFromApplicationUser.Designer.cs" />
+    <Compile Remove="Migrations\20201121175437_AddSettingIdToApplicationUser.cs" />
+    <Compile Remove="Migrations\20201121175437_AddSettingIdToApplicationUser.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
