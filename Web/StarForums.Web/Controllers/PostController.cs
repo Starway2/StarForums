@@ -12,7 +12,7 @@
     using StarForums.Web.ViewModels.Home;
     using StarForums.Web.ViewModels.Posts;
 
-    public class PostController : BaseController
+    public class PostController : Controller
     {
         private readonly IPostsService postsService;
         private readonly ICategoriesService categoriesService;
@@ -148,7 +148,7 @@
 
             model.UserId = user.Id;
 
-            await this.commentsService.AddComment(model);
+            await this.commentsService.AddCommentAsync(model);
 
             return this.Redirect($"/{categoryName}/{postId}");
         }
@@ -184,6 +184,31 @@
             await this.postsService.EditAsync(model.Id, model.Title, model.Content);
 
             return this.Redirect($"/{categoryName}/{model.Id}");
+        }
+
+        [Route("/{categoryName}/{postId}/EditComment/{commentId}")]
+        [Authorize]
+        public IActionResult EditComment(string categoryName, int postId, int commentId)
+        {
+            var model = this.commentsService.GetById<EditCommentInputModel>(commentId);
+
+            return this.View(model);
+        }
+
+        [Route("/{categoryName}/{postId}/EditComment/{commentId}")]
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> EditComment(EditCommentInputModel model, string categoryName, int postId)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            await this.commentsService.EditCommentAsync(model.Id, model.Content);
+
+            // TODO: Redirect to comment
+            return this.Redirect($"/{categoryName}/{postId}");
         }
     }
 }

@@ -26,10 +26,10 @@
                 </div>
                 @if (User.Identity.Name == Model.UserUserName || User.IsInRole("Moderator") || User.IsInRole("Administrator"))
                 {
-            <div class="align-bot-right d-inline-block position-absolute m-2">
-                <a class="btn btn-sm btn-dark" href="/@Model.CategoryName/@Model.Id/Edit">Edit</a>
-                <a class="btn btn-sm btn-dark" href="/@Model.CategoryName/@Model.Id/Delete">Delete</a>
-            </div>
+                    <div class="align-bot-right d-inline-block position-absolute m-2">
+                        <a class="btn btn-sm btn-dark font-12" href="/@Model.CategoryName/@Model.Id/Edit">Edit</a>
+                        <a class="btn btn-sm btn-dark font-12" href="/@Model.CategoryName/@Model.Id/Delete">Delete</a>
+                    </div>
                 }
             </div>
         </div>
@@ -52,16 +52,28 @@
                         <span class="font-12">Total posts: @comment.UserPostsCount</span><br />
                         <span class="font-12">Total comments: @comment.UserCommentsCount</span>
                     </div>
-                    <div class="d-inline-block text-center post-content p-1">
-                        <div class="p-0 m-2 text-left"><p class="m-1">@Html.Raw(comment.CleanContent)</p></div>
+                    <div class="d-inline-block text-center post-content p-1 position-relative">
+
+                        <div class="p-0 m-2 text-left">
+                        <p class="m-1">@Html.Raw(comment.CleanContent)</p>
+                        </div>
+
+                        @if (User.Identity.Name == comment.UserUsername || User.IsInRole("Moderator") || User.IsInRole("Administrator"))
+                        {
+                            <div class="align-bot-right d-inline-block position-absolute m-2">
+                                <a class="btn btn-sm btn-dark font-12" href="/@Model.CategoryName/@Model.Id/EditComment/@comment.Id">Edit</a>
+                                <a class="btn btn-sm btn-dark font-12" href="/@Model.CategoryName/@Model.Id/DeleteComment/@comment.Id">Delete</a>
+                            </div>
+                        }
                     </div>
+
                 </div>
             </div>
         }
     }
     else
     {
-        <h5 class="text-dark mt-4">Нo one has commented yet. Be the first to comment!</h5>
+        <h5 class="text-dark mt-4">No comments yet. Be the first to comment!</h5>
     }
 
     @if (this.User.Identity.IsAuthenticated)

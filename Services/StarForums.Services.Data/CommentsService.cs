@@ -17,7 +17,7 @@
             this.repository = repository;
         }
 
-        public async Task AddComment(CommentInputModel model)
+        public async Task AddCommentAsync(CommentInputModel model)
         {
             var comment = new Comment()
             {
@@ -30,7 +30,17 @@
             await this.repository.SaveChangesAsync();
         }
 
+        public async Task EditCommentAsync(int commentId, string content)
+        {
+            var comment = this.repository.All().Where(x => x.Id == commentId).FirstOrDefault();
+            comment.Content = content;
+            this.repository.Update(comment);
+            await this.repository.SaveChangesAsync();
+        }
+
         public IEnumerable<T> GetAll<T>(int postId) => this.repository.All().Where(x => x.PostId == postId).OrderBy(x => x.CreatedOn).To<T>().ToList();
+
+        public T GetById<T>(int commentId) => this.repository.All().Where(x => x.Id == commentId).To<T>().FirstOrDefault();
 
         public IEnumerable<T> GetByUserId<T>(string userId) => this.repository.All().Where(x => x.UserId == userId).To<T>().ToList();
     }

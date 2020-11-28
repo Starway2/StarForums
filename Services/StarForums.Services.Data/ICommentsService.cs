@@ -11,6 +11,10 @@
 
         IEnumerable<T> GetByUserId<T>(string userId);
 
-        Task AddComment(CommentInputModel model);
+        T GetById<T>(int commentId);
+
+        Task EditCommentAsync(int commentId, string content);
+
+        Task AddCommentAsync(CommentInputModel model);
     }
 }

@@ -15,7 +15,7 @@
     using StarForums.Web.ViewModels.Posts;
     using StarForums.Web.ViewModels.Profile;
 
-    public class ProfileController : BaseController
+    public class ProfileController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IProfileService profileService;

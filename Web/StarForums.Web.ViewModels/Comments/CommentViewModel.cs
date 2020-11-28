@@ -8,6 +8,8 @@
 
     public class CommentViewModel : IMapFrom<Comment>
     {
+        public int Id { get; set; }
+
         public string Content { get; set; }
 
         public string CleanContent => new HtmlSanitizer().Sanitize(this.Content);
