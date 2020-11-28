@@ -5,8 +5,17 @@
 <div class="text-center">
     <h2 class="m-0">Viewing profle - @Model.Username</h2>
     <div class="m-2">
-        <img src="@Model.AvatarUrl" />
-        <a asp-controller="Profile" asp-action="ChangeAvatar" class="btn btn-sm btn-outline-dark">Change</a>
+        <img src="@Model.AvatarUrl" class="img-thumbnail img-profile" />
+        @if (Model.Username == this.User.Identity.Name && this.User.Identity.IsAuthenticated)
+        {
+            <form method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="ChangeAvatar">
+                <div class="mt-2">
+                    <label for="file" class="btn btn-sm btn-dark text-light">Change profile picture</label>
+                    <input type="file" id="file" name="file" accept="image/png, image/jpeg" class="d-none">
+                </div>
+                <button type="submit" class="btn btn-sm btn-outline-dark d-none" id="uploadImg">Upload</button>
+            </form>
+        }
     </div>
     <div>
         <span>Created on: @Model.CreatedOn</span>

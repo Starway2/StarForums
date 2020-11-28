@@ -15,8 +15,8 @@
                 <span class="text-center font-weight-bold text-dark"><a asp-controller="Profile" asp-action="Index" asp-route-u="@Model.UserUserName" class="text-dark">@Model.UserUserName</a></span>
                 <img src="@Model.UserAvatarUrl" class="img-thumbnail my-1" />
                 <span class="font-12">Join date: @Model.User.CreatedOn.ToString("dd.MM.yyyy")</span><br>
-                <span class="font-12">Total posts: @Model.User.Posts.Count</span><br>
-                <span class="font-12">Total comments: @Model.User.Comments.Count</span>
+                <span class="font-12">Total posts: @Model.UserPostsCount</span><br>
+                <span class="font-12">Total comments: @Model.UserCommentsCount</span>
             </div>
             <div class="d-inline-block text-center post-content p-1 position-relative">
                 <span class="p-2 font-weight-bolder font-16">@Model.Title</span>
@@ -49,8 +49,8 @@
                         <span class="text-center font-weight-bold"><a asp-controller="Profile" asp-action="Index" asp-route-u="@comment.UserUsername" class="text-dark">@comment.UserUsername</a></span>
                         <img src="@comment.UserAvatarUrl" class="img-thumbnail my-1" />
                         <span class="font-12">Join date: @comment.User.CreatedOn.ToString("dd.MM.yyyy")</span>
-                        <span class="font-12">Total posts: @comment.User.Posts.Count</span><br />
-                        <span class="font-12">Total comments: @comment.User.Comments.Count</span>
+                        <span class="font-12">Total posts: @comment.UserPostsCount</span><br />
+                        <span class="font-12">Total comments: @comment.UserCommentsCount</span>
                     </div>
                     <div class="d-inline-block text-center post-content p-1">
                         <div class="p-0 m-2 text-left"><p class="m-1">@Html.Raw(comment.CleanContent)</p></div>

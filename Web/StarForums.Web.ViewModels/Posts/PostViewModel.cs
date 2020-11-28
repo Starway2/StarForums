@@ -34,6 +34,8 @@
 
         public ApplicationUser User { get; set; }
 
+        public int UserCommentsCount { get; set; }
+
         public IEnumerable<CommentViewModel> Comments { get; set; }
     }
 }

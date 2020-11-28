@@ -24,6 +24,8 @@
 
         public int UserPostsCount { get; set; }
 
+        public int UserCommentsCount { get; set; }
+
         public string UserAvatarUrl { get; set; }
 
         public ApplicationUser User { get; set; }
