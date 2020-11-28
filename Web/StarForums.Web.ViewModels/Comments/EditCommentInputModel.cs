@@ -16,7 +16,7 @@
         public Post Post { get; set; }
 
         [Required]
-        [MinLength(50)]
+        [MinLength(20)]
         public string Content { get; set; }
 
         public string CleanContent => new HtmlSanitizer().Sanitize(this.Content);
