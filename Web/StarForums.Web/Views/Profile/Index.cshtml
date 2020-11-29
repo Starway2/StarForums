@@ -29,10 +29,7 @@
     <div>
         <span>Email: @Model.Email</span>
     </div>
-    @if (this.User.Identity.Name == this.Model.Username)
-    {
         <div class="m-2">
-            <a class="btn btn-sm btn-dark text-light" asp-controller="Profile" asp-action="Index">Settings</a>
+            <a class="btn btn-sm btn-dark text-light" asp-controller="Info" asp-action="Index" asp-route-u="@Model.Username">Personal info</a>
         </div>
-    }
 </div>
