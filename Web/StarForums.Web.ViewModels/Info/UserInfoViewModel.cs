@@ -11,7 +11,7 @@
 
         public string UserEmail { get; set; }
 
-        public string UserPhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         public string Name { get; set; }
 
@@ -24,8 +24,6 @@
         public string Instagram { get; set; }
 
         public string Skype { get; set; }
-
-        public string PhoneNumber { get; set; }
 
         public string Country { get; set; }
 
