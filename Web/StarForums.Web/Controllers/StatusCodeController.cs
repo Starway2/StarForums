@@ -11,9 +11,9 @@
             switch (statusCode)
             {
                 case 404:
-                    return this.View();
-                default:
-                    break;
+                    return this.View("NotFound");
+                case 403:
+                    return this.View("Forbidden");
             }
 
             return this.View();
