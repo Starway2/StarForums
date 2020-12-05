@@ -9,27 +9,31 @@
         <a asp-controller="Profile" asp-action="Index" asp-route-u="@Model.UserUsername" class="text-dark"><h4 class="text-dark">@Model.UserUsername</h4></a>
         @if (this.User.Identity.IsAuthenticated && this.User.Identity.Name == Model.UserUsername)
         {
-            <a asp-controller="Profile" asp-action="Index" asp-route-u="@Model.UserUsername" class="btn btn-sm btn-dark d-inline-block align-self-start font-12">Edit information</a>
+            <a asp-controller="Info" asp-action="Edit" asp-route-u="@Model.UserUsername" class="btn btn-sm btn-dark d-inline-block align-self-start font-12">Edit information</a>
         }
     </div>
-
-    <h4 class="mt-2">Personal information</h4>
-    <hr />
-    <span class="d-block">Name: @Model.Name</span>
-    <span class="d-block">Age: @Model.Age</span>
-    <span class="d-block">Birth date: @Model.BirthDate.ToLongDateString()</span>
-    <span class="d-block">Gender: @Model.Gender</span>
-    <span class="d-block">Country: @Model.Country</span>
-    <span class="d-block">City: @Model.City</span>
-    <span class="d-block">Country: @Model.PhoneNumber</span>
-    <span class="d-block">Phone number: @Model.PhoneNumber</span>
-
-    <h4 class="mt-2">Social information</h4>
-    <hr />
-    <span class="d-block">Email: @Model.UserEmail</span>
-    <span class="d-block">Name: @Model.Facebook</span>
-    <span class="d-block">Age: @Model.Instagram</span>
-    <span class="d-block">Birth date: @Model.Twitter</span>
-    <span class="d-block">Gender: @Model.Skype</span>
+    <div class="row justify-content-between">
+        <div class="col-4">
+            <h4 class="mt-2">Personal information</h4>
+            <hr />
+            <span class="d-block">Name: @Model.Name</span>
+            <span class="d-block">Age: @Model.Age</span>
+            @if (Model.UserUsername == this.User.Identity.Name){<span class="d-block">Birth date: @Model.BirthDate.ToString("d-MMMM-yyyy")</span>}
+            <span class="d-block">Gender: @Model.Gender</span>
+            <span class="d-block">Country: @Model.Country</span>
+            <span class="d-block">City: @Model.City</span>
+            <span class="d-block">Country: @Model.PhoneNumber</span>
+            <span class="d-block">Phone number: @Model.PhoneNumber</span>
+        </div>
+        <div class="col-3">
+            <h4 class="mt-2">Social information</h4>
+            <hr />
+            @if (Model.UserUsername == this.User.Identity.Name){<span class="d-block">Email: @Model.UserEmail</span>}
+            <span class="d-block">Facebook: @Model.Facebook</span>
+            <span class="d-block">Instagram: @Model.Instagram</span>
+            <span class="d-block">Twitter: @Model.Twitter</span>
+            <span class="d-block">Skype: @Model.Skype</span>
+        </div>
+    </div>
 </div>
 
