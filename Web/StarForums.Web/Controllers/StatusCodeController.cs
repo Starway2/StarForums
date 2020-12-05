@@ -3,7 +3,7 @@
     using CloudinaryDotNet.Actions;
     using Microsoft.AspNetCore.Mvc;
 
-    public class StatusCode : Controller
+    public class StatusCodeController : Controller
     {
         [Route("/Error/Index/{statusCode}")]
         public IActionResult Index(int statusCode)
