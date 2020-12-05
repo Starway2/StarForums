@@ -4,14 +4,15 @@
 
     public class CommentInputModel
     {
-        [Required]
+        public string PostTitle { get; set; }
+
         public int PostId { get; set; }
 
-        [Required]
-        [MinLength(20)]
+        [Required(ErrorMessage = "The comment must be at least 10 characters long.")]
+        [Display(Name = "Content")]
+        [MinLength(10)]
         public string Content { get; set; }
 
-        [Required]
         public string UserId { get; set; }
     }
 }
