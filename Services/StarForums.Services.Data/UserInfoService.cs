@@ -16,7 +16,7 @@
             this.repository = repository;
         }
 
-        public async void CreateInfoAsync(string userId)
+        public async Task CreateInfoAsync(string userId)
         {
             var info = new UserInfo()
             {

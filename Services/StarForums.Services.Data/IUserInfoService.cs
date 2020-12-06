@@ -7,7 +7,7 @@ namespace StarForums.Services.Data
     {
         T GetById<T>(string userId);
 
-        void CreateInfoAsync(string userId);
+        Task CreateInfoAsync(string userId);
 
         Task UpdateInfoAsync(UserInfoInputModel model);
     }

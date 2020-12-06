@@ -16,6 +16,7 @@
     using Microsoft.AspNetCore.WebUtilities;
     using Microsoft.Extensions.Logging;
     using StarForums.Data.Models;
+    using StarForums.Services.Data;
 
     [AllowAnonymous]
     public class RegisterModel : PageModel
@@ -24,17 +25,20 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ILogger<RegisterModel> logger;
         private readonly IEmailSender emailSender;
+        private readonly IUserInfoService userInfoService;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IUserInfoService userInfoService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.logger = logger;
             this.emailSender = emailSender;
+            this.userInfoService = userInfoService;
         }
 
         [BindProperty]
@@ -86,6 +90,8 @@
                 if (result.Succeeded)
                 {
                     this.logger.LogInformation("User created a new account with password.");
+
+                    await this.userInfoService.CreateInfoAsync(user.Id);
 
                     var code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
