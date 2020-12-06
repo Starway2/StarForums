@@ -1,8 +1,9 @@
 ﻿namespace StarForums.Services.Data
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
-    using StarForums.Data.Models;
+    using StarForums.Web.ViewModels.Category;
 
     public interface ICategoriesService
     {
@@ -11,5 +12,7 @@
         T GetById<T>(int id);
 
         T GetByName<T>(string name);
+
+        Task<bool> CreateAsync(CategoryInputModel model);
     }
 }

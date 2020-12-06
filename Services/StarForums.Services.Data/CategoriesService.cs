@@ -2,10 +2,12 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using StarForums.Data.Common.Repositories;
     using StarForums.Data.Models;
     using StarForums.Services.Mapping;
+    using StarForums.Web.ViewModels.Category;
 
     public class CategoriesService : ICategoriesService
     {
@@ -14,6 +16,27 @@
         public CategoriesService(IRepository<Category> repository)
         {
             this.repository = repository;
+        }
+
+        public async Task<bool> CreateAsync(CategoryInputModel model)
+        {
+            var categories = this.repository.All().Where(x => x.Name.ToLower() == model.Title.ToLower());
+
+            if (categories.Any())
+            {
+                return false;
+            }
+
+            var category = new Category()
+            {
+                Name = model.Title,
+                Description = model.Description,
+            };
+
+            await this.repository.AddAsync(category);
+            await this.repository.SaveChangesAsync();
+
+            return true;
         }
 
         public IEnumerable<T> GetAll<T>()

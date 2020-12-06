@@ -1,0 +1,25 @@
+﻿@model StarForums.Web.ViewModels.Category.CategoryInputModel
+@{
+    this.ViewData["Title"] = "Create new category";
+}
+
+<div class="container">
+    <form method="post" class="form-group text-center ">
+        <div>
+            @if (Model.Exist)
+            {
+                <span class="text-danger">Category with the same name exist! Please choose another.</span>
+            }
+            <div asp-validation-summary="All" class="text-danger"></div>
+        </div>
+        <div class="col-4 container">
+            <label asp-for="Title"></label>
+            <input type="text" asp-for="Title" class="form-control" />
+        </div>
+        <div class="m-2">
+            <label asp-for="Description"></label>
+            <input type="text" asp-for="Description" class="form-control" />
+        </div>
+        <button type="submit" asp-controller="Category" asp-action="Create" class="btn btn-dark btn-sm m-2">Create</button>
+    </form>
+</div>
