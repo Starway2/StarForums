@@ -27,33 +27,16 @@
             this.userManager = userManager;
         }
 
-        [Route("/{categoryName}/{postId}")]
-        public IActionResult Index(int postId, string categoryName)
+        public IActionResult Index(int id)
         {
-            var post = this.postsService.GetById<PostViewModel>(postId);
-            var category = this.categoriesService.GetByName<CategoryViewModel>(categoryName);
+            var post = this.postsService.GetById<PostViewModel>(id);
 
             if (post == null)
             {
                 return this.NotFound();
             }
 
-            if (category == null)
-            {
-                return this.NotFound();
-            }
-
-            if (post.CategoryId != category.Id)
-            {
-                return this.NotFound();
-            }
-
-            if (post == null)
-            {
-                return this.NotFound();
-            }
-
-            var comments = this.commentsService.GetAll<CommentViewModel>(postId);
+            var comments = this.commentsService.GetAll<CommentViewModel>(id);
 
             post.Comments = comments;
 
@@ -186,7 +169,6 @@
             return this.Redirect($"/{categoryName}/{model.Id}");
         }
 
-        [Route("/{categoryName}/{postId}/EditComment/{commentId}")]
         [Authorize]
         public IActionResult EditComment(string categoryName, int postId, int commentId)
         {
@@ -195,7 +177,6 @@
             return this.View(model);
         }
 
-        [Route("/{categoryName}/{postId}/EditComment/{commentId}")]
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> EditComment(EditCommentInputModel model, string categoryName, int postId)
@@ -208,7 +189,7 @@
             await this.commentsService.EditCommentAsync(model.Id, model.Content);
 
             // TODO: Redirect to comment
-            return this.Redirect($"/{categoryName}/{postId}");
+            return this.Redirect($"/{model.Post.Category.Name}/{model.PostId}");
         }
     }
 }
