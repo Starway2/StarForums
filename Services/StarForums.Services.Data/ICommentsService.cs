@@ -16,5 +16,7 @@
         Task EditCommentAsync(int commentId, string content);
 
         Task AddCommentAsync(CommentInputModel model);
+
+        Task<int> DeleteComment(int id);
     }
 }

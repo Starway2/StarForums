@@ -191,5 +191,28 @@
             // TODO: Redirect to comment
             return this.Redirect($"/{model.Post.Category.Name}/{model.PostId}");
         }
+
+        [Authorize]
+        public IActionResult DeleteComment(int id)
+        {
+            var comment = this.commentsService.GetById<CommentViewModel>(id);
+            var userId = this.userManager.GetUserId(this.User);
+
+            if (comment.UserId == userId || this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.ModeratorRoleName))
+            {
+                return this.View(comment);
+            }
+
+            return this.StatusCode(403);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> DeleteComment(CommentViewModel model)
+        {
+            var postId = await this.commentsService.DeleteComment(model.Id);
+
+            return this.RedirectToAction("Index", new { id = postId });
+        }
     }
 }

@@ -38,6 +38,16 @@
             await this.repository.SaveChangesAsync();
         }
 
+        public async Task<int> DeleteComment(int id)
+        {
+            var comment = this.repository.All().Where(x => x.Id == id).FirstOrDefault();
+
+            this.repository.Delete(comment);
+            await this.repository.SaveChangesAsync();
+
+            return comment.PostId;
+        }
+
         public IEnumerable<T> GetAll<T>(int postId) => this.repository.All().Where(x => x.PostId == postId).OrderBy(x => x.CreatedOn).To<T>().ToList();
 
         public T GetById<T>(int commentId) => this.repository.All().Where(x => x.Id == commentId).To<T>().FirstOrDefault();
