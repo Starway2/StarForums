@@ -1,0 +1,23 @@
+﻿@model StarForums.Web.ViewModels.Category.CategoryInputModel
+@{
+    this.ViewData["Title"] = "Edit category";
+}
+
+<div class="container text-center">
+    <h3>Edit category</h3>
+    <form method="post" class="form-group text-center mb-0">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="col-4 container">
+            <label asp-for="Title" class="form-label d-block"></label>
+            <input type="text" asp-for="Title" value="@Model.Title" class="form-control"/>
+        </div>
+        <div class="col-8 container">
+            <label asp-for="Description"></label>
+            <input type="text" asp-for="Description" value="@Model.Description" class="form-control"/>
+        </div>
+        <input type="hidden" asp-for="Id" value="@Model.Id" />
+
+        <button type="submit" asp-controller="Category" asp-action="Edit" class="btn btn-dark btn-sm mt-3">Save</button>
+        <a href="#" class="btn btn-sm btn-outline-dark mt-3" onclick="history.go(-1)">Cancel</a>
+    </form>
+</div>

@@ -6,10 +6,6 @@
 <div class="container">
     <form method="post" class="form-group text-center ">
         <div>
-            @if (Model.Exist)
-            {
-                <span class="text-danger">Category with the same name exist! Please choose another.</span>
-            }
             <div asp-validation-summary="All" class="text-danger"></div>
         </div>
         <div class="col-4 container">

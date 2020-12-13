@@ -1,7 +1,5 @@
 ﻿@model StarForums.Web.ViewModels.Home.CategoryListModel
-@{ 
-    this.ViewData["Title"] = "Home";
-}
+@{ this.ViewData["Title"] = "Home"; }
 <div class="text-center font-16">
     <table class="table table-bordered rounded-top">
         <thead class="thead-dark">
@@ -12,17 +10,14 @@
         </thead>
         @foreach (var category in Model.Categories)
         {
-            <tr>
-                <td class="align-middle">
-                <div class="d-inline-block">
-                    <a href="@category.Name" class="text-dark"><h5 class="p-0 m-0">@category.Name</h5></a>
-                </div>
-                    <div>
-                        <span class="small">@category.CleanDescription</span>
-                    </div>
-                </td>
-                <td class="align-middle"style="width: 10%;">@category.Posts.Count()</td>
-            </tr>
-        }
+<tr>
+    <td class="align-middle">
+    <div class="d-inline-block">
+        <a href="@category.Name" class="text-dark"><h5 class="p-0 m-0">@category.Name</h5></a>
+        <span class="small">@category.CleanDescription</span>
+    </div>
+    </td>
+    <td class="align-middle" style="width: 10%;">@category.Posts.Count()</td>
+</tr>}
     </table>
 </div>

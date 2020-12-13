@@ -14,5 +14,7 @@
         T GetByName<T>(string name);
 
         Task<bool> CreateAsync(CategoryInputModel model);
+
+        Task UpdateAsync(CategoryInputModel model);
     }
 }

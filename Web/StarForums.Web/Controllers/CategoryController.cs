@@ -45,9 +45,8 @@
             {
                 return this.StatusCode(403);
             }
-            var model = new CategoryInputModel() { Exist = false };
 
-            return this.View(model);
+            return this.View();
         }
 
         [HttpPost]
@@ -66,13 +65,46 @@
 
             var result = await this.categoriesService.CreateAsync(model);
 
-            if (!result)
+            return this.RedirectToAction("Index", "Home");
+        }
+
+        [Authorize]
+        public IActionResult Edit(string title)
+        {
+            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
-                model.Exist = true;
+                return this.StatusCode(403);
+            }
+
+            var query = this.categoriesService.GetByName<CategoryViewModel>(title);
+
+            if (query == null)
+            {
+                return this.NotFound();
+            }
+
+            var category = new CategoryInputModel() { Title = query.Name, Description = query.Description, Id = query.Id };
+
+            return this.View(category);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Edit(CategoryInputModel model)
+        {
+            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                return this.StatusCode(403);
+            }
+
+            if (!this.ModelState.IsValid)
+            {
                 return this.View(model);
             }
 
-            return this.RedirectToAction("Index", "Home");
+            await this.categoriesService.UpdateAsync(model);
+
+            return this.RedirectToAction("Index", new { categoryName = model.Title});
         }
     }
 }

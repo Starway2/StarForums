@@ -39,24 +39,21 @@
             return true;
         }
 
-        public IEnumerable<T> GetAll<T>()
+        public IEnumerable<T> GetAll<T>() => this.repository.All().To<T>().ToList();
+
+        public T GetById<T>(int id) => this.repository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
+
+        public T GetByName<T>(string name) => this.repository.All().Where(x => x.Name.Replace(" ", "-") == name.Replace(" ", "-")).To<T>().FirstOrDefault();
+
+        public async Task UpdateAsync(CategoryInputModel model)
         {
-            IQueryable<Category> query = this.repository.All();
+            var category = this.repository.All().Where(x => x.Id == model.Id).FirstOrDefault();
 
-            return query.To<T>().ToList();
-        }
+            category.Name = model.Title;
+            category.Description = model.Description;
 
-        public T GetById<T>(int id)
-        {
-            var category = this.repository.All().Where(x => x.Id == id);
-            return category.To<T>().FirstOrDefault();
-        }
-
-        public T GetByName<T>(string name)
-        {
-            var category = this.repository.All().Where(x => x.Name.Replace(" ", "-") == name.Replace(" ", "-")).To<T>().FirstOrDefault();
-
-            return category;
+            this.repository.Update(category);
+            await this.repository.SaveChangesAsync();
         }
     }
 }
