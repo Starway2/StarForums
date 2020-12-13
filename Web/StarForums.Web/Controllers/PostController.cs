@@ -101,6 +101,39 @@
             return this.Redirect($"/{categoryName}/{postId}");
         }
 
+        [Route("/{categoryName}/{postId}/Edit")]
+        [Authorize]
+        public IActionResult Edit(int postId)
+        {
+
+            var post = this.postsService.GetById<PostEditViewModel>(postId);
+            var currentUserId = this.userManager.GetUserId(this.User);
+
+            post.ReturnUrl = this.HttpContext.Request.Headers["Referer"].ToString();
+
+            if (post.UserId == currentUserId || this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.ModeratorRoleName))
+            {
+                return this.View(post);
+            }
+
+            return this.NotFound();
+        }
+
+        [Route("/{categoryName}/{postId}/Edit")]
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Edit(PostEditViewModel model, string categoryName)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                this.View(model);
+            }
+
+            await this.postsService.EditAsync(model.Id, model.Title, model.Content);
+
+            return this.Redirect($"/{categoryName}/{model.Id}");
+        }
+
         [Route("/{categoryName}/{postId}/AddComment")]
         [Authorize]
         public IActionResult AddComment(int postId)
@@ -134,39 +167,6 @@
             await this.commentsService.AddCommentAsync(model);
 
             return this.Redirect($"/{categoryName}/{postId}");
-        }
-
-        [Route("/{categoryName}/{postId}/Edit")]
-        [Authorize]
-        public IActionResult Edit(int postId)
-        {
-
-            var post = this.postsService.GetById<PostEditViewModel>(postId);
-            var currentUserId = this.userManager.GetUserId(this.User);
-
-            post.ReturnUrl = this.HttpContext.Request.Headers["Referer"].ToString();
-
-            if (post.UserId == currentUserId || this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.ModeratorRoleName))
-            {
-                return this.View(post);
-            }
-
-            return this.NotFound();
-        }
-
-        [Route("/{categoryName}/{postId}/Edit")]
-        [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> Edit(PostEditViewModel model, string categoryName)
-        {
-            if (!this.ModelState.IsValid)
-            {
-                this.View(model);
-            }
-
-            await this.postsService.EditAsync(model.Id, model.Title, model.Content);
-
-            return this.Redirect($"/{categoryName}/{model.Id}");
         }
 
         [Authorize]
