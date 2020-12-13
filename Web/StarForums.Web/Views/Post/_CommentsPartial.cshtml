@@ -1,0 +1,35 @@
+﻿@model StarForums.Web.ViewModels.Comments.CommentViewModel
+@{
+    int commentId = (int) this.ViewData["CommentId"];
+}
+<div class="mb-2">
+    <div class="bg-dark overflow-hidden">
+        <span class="d-inline float-left p-1 text-light font-12">@Model.CreatedOn</span>
+        <span class="d-inline float-right p-1 text-light font-12">#@commentId</span>
+    </div>
+    <div class="border border-1 border-dark d-inline-flex w-100 text-center text-dark">
+        <div class="d-inline-block p-1 align-top text-center border-right border-dark post-user">
+            <span class="text-center font-weight-bold"><a asp-controller="Profile" asp-action="Index" asp-route-u="@Model.UserUsername" class="text-dark">@Model.UserUsername</a></span>
+            <img src="@Model.UserAvatarUrl" class="img-thumbnail my-1" />
+            <span class="font-12">Join date: @Model.User.CreatedOn.ToString("dd.MM.yyyy")</span>
+            <span class="font-12">Total posts: @Model.UserPostsCount</span><br />
+            <span class="font-12">Total comments: @Model.UserCommentsCount</span>
+        </div>
+        <div class="d-inline-block text-center post-content p-1 position-relative">
+
+            <div class="p-0 m-2 text-left">
+                <p class="m-1">@Html.Raw(Model.CleanContent)</p>
+            </div>
+
+            @if (User.Identity.Name == Model.UserUsername || User.IsInRole("Moderator") || User.IsInRole("Administrator"))
+            {
+                <div class="align-bot-right d-inline-block position-absolute m-2">
+                    <a class="btn btn-sm btn-dark font-12" asp-controller="Post" asp-action="EditComment" asp-route-commentId="@Model.Id">Edit</a>
+                    <a class="btn btn-sm btn-dark font-12" asp-controller="Post" asp-action="DeleteComment" asp-route-commentId="@Model.Id">Delete</a>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+

@@ -38,37 +38,8 @@
     {
         @foreach (var comment in Model.Comments)
         {
-            commentId++;
-            <div class="mb-2">
-                <div class="bg-dark overflow-hidden">
-                    <span class="d-inline float-left p-1 text-light font-12">@comment.CreatedOn</span>
-                    <span class="d-inline float-right p-1 text-light font-12">#@commentId</span>
-                </div>
-                <div class="border border-1 border-dark d-inline-flex w-100 text-center text-dark">
-                    <div class="d-inline-block p-1 align-top text-center border-right border-dark post-user">
-                        <span class="text-center font-weight-bold"><a asp-controller="Profile" asp-action="Index" asp-route-u="@comment.UserUsername" class="text-dark">@comment.UserUsername</a></span>
-                        <img src="@comment.UserAvatarUrl" class="img-thumbnail my-1" />
-                        <span class="font-12">Join date: @comment.User.CreatedOn.ToString("dd.MM.yyyy")</span>
-                        <span class="font-12">Total posts: @comment.UserPostsCount</span><br />
-                        <span class="font-12">Total comments: @comment.UserCommentsCount</span>
-                    </div>
-                    <div class="d-inline-block text-center post-content p-1 position-relative">
-
-                        <div class="p-0 m-2 text-left">
-                        <p class="m-1">@Html.Raw(comment.CleanContent)</p>
-                        </div>
-
-                        @if (User.Identity.Name == comment.UserUsername || User.IsInRole("Moderator") || User.IsInRole("Administrator"))
-                        {
-                            <div class="align-bot-right d-inline-block position-absolute m-2">
-                                <a class="btn btn-sm btn-dark font-12" href="/@Model.CategoryName/@Model.Id/EditComment/@comment.Id">Edit</a>
-                                <a class="btn btn-sm btn-dark font-12" href="/@Model.CategoryName/@Model.Id/DeleteComment/@comment.Id">Delete</a>
-                            </div>
-                        }
-                    </div>
-
-                </div>
-            </div>
+            this.ViewData["CommentId"] = ++commentId;
+            <partial name="_CommentsPartial" model="comment" />
         }
     }
     else

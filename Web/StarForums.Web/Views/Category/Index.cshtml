@@ -16,12 +16,12 @@
                 <span class="text-dark">Want to add a post? Please <a href="/Login" class="text-success font-weight-bold">sign-in</a> or create a <a href="/Register" class="text-success font-weight-bold">new account</a>.</span>
             }
         </div>
-        <div class="d-inline-block mt-2">
-            @if (this.User.IsInRole("Administrator"))
-            {
+        @if (this.User.IsInRole("Administrator"))
+        {
+            <div class="d-inline-block mt-2">
                 <a asp-controller="Category" asp-action="Edit" asp-route-title="@Model.Name" class="btn btn-sm btn-dark">Edit</a>
-            }
-        </div>
+            </div>
+        }
     </div>
     <table class="table table-sm table-bordered rounded-lg">
         <thead class="thead-dark">
@@ -35,7 +35,7 @@
         {
             <tr>
                 <td>
-                    <div><a href="/@Model.Name/@post.Id">@post.Title</a></div>
+                    <div><a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">@post.Title</a></div>
                     <div class="small text-muted ">posted by: <a class="text-muted font-weight-bold" asp-controller="Profile" asp-action="Index" asp-route-u="@post.UserUserName">@post.UserUserName</a></div>
                     <div class="small text-muted ">@post.CreatedOn.ToString("dd-MMM-yyyy hh:mm tt")</div>
                 </td>

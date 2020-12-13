@@ -13,6 +13,6 @@
         </div>
         <input type="hidden" asp-for="Id" value="@Model.Id" />
         <input type="hidden" asp-for="PostId" value="@Model.PostId" />
-        <button type="submit" class="btn btn-primary">Finish editing</button>
+        <button type="submit" asp-action="EditComment" asp-controller="Post" class="btn btn-dark btn-primary">Finish editing</button>
     </form>
 </div>
