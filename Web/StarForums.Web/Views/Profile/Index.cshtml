@@ -18,6 +18,7 @@
             </form>
         }
     </div>
+    <hr />
     <div>
         <span>Created on: @Model.CreatedOn</span>
     </div>
@@ -33,4 +34,6 @@
     <div class="m-2">
         <a class="btn btn-sm btn-dark text-light" asp-controller="Info" asp-action="Index" asp-route-u="@Model.Username">Personal info</a>
     </div>
+    <hr class="mx-4" />
+    <partial name="_SignaturePartial" model="Model" />
 </div>

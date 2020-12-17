@@ -106,5 +106,14 @@
 
             return this.NotFound();
         }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> ChangeSignature(string signature)
+        {
+            await this.profileService.ChangeSignature(signature, this.userManager.GetUserId(this.User));
+
+            return this.RedirectToAction("Index");
+        }
     }
 }

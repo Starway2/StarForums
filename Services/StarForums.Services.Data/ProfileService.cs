@@ -50,6 +50,16 @@
             return true;
         }
 
+        public async Task ChangeSignature(string signature, string userId)
+        {
+            var user = this.repository.All().Where(x => x.Id == userId).FirstOrDefault();
+
+            user.Signature = signature;
+
+            this.repository.Update(user);
+            await this.repository.SaveChangesAsync();
+        }
+
         public T GetProfileByUserId<T>(string userId)
         {
             var user = this.repository.All().Where(x => x.Id == userId);

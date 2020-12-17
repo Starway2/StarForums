@@ -8,5 +8,7 @@
         T GetProfileByUserId<T>(string userId);
 
         Task<bool> ChangeAvatar(string fileName, MemoryStream file, string userId);
+
+        Task ChangeSignature(string signature, string userId);
     }
 }

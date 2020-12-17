@@ -13,4 +13,12 @@ $(document).ready(function () {
     $("#file").on('change', function () {
         $("#uploadImg").removeClass("d-none");
     });
+
+    $("#editSignature").on('click', function EditSignature() {
+        $("#signature").removeClass("d-none");
+    });
+
+    $("#cancelSignature").on('click', function CancelSignature() {
+        $("#signature").addClass("d-none");
+    });
 });

@@ -1,0 +1,15 @@
+﻿@model StarForums.Web.ViewModels.Profile.ProfileViewModel
+<div>
+    <span>@Html.Raw(Model.Signature)</span>
+    @if (this.User.Identity.Name == Model.Username)
+    {
+        <button id="editSignature" class="btn btn-sm btn-dark text-light" onclick="EditSignature();">Edit signature</button>
+        <form method="post" id="signature" name="signature" class="d-none m-2">
+            <textarea id="text-editor" asp-for="Signature" class="form-control">@Model.Signature</textarea>
+            <div class="m-2">
+                <button type="submit" asp-controller="Profile" asp-action="ChangeSignature" class="btn btn-dark btn-sm m-2">Save</button>
+                <button type="button" id="cancelSignature" onclick="cancelSignature();" class="btn btn-sm btn-outline-dark m-2">Cancel</button>
+            </div>
+        </form>
+    }
+</div>

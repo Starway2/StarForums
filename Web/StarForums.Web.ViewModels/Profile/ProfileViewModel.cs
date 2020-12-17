@@ -1,7 +1,7 @@
 ﻿namespace StarForums.Web.ViewModels.Profile
 {
     using System;
-
+    using Ganss.XSS;
     using StarForums.Data.Models;
     using StarForums.Services.Mapping;
 
@@ -18,5 +18,9 @@
         public string Email { get; set; }
 
         public DateTime CreatedOn { get; set; }
+
+        public string Signature { get; set; }
+
+        public string CleanSignature => new HtmlSanitizer().Sanitize(Signature);
     }
 }
