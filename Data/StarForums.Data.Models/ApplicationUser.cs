@@ -29,6 +29,8 @@ namespace StarForums.Data.Models
 
         public string AvatarUrl { get; set; }
 
+        public string Signature { get; set; }
+
         public DateTime? DeletedOn { get; set; }
 
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
