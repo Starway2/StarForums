@@ -1,6 +1,6 @@
 ﻿@model StarForums.Web.ViewModels.Comments.CommentViewModel
 @{
-    int commentId = (int) this.ViewData["CommentId"];
+    int commentId = (int)this.ViewData["CommentId"];
 }
 <div class="mb-2">
     <div class="bg-dark overflow-hidden">
@@ -20,6 +20,15 @@
             <div class="p-0 m-2 text-left">
                 <p class="m-1">@Html.Raw(Model.CleanContent)</p>
             </div>
+            @if (Model.User.Signature != null)
+            {
+                <hr />
+                <div>
+                    <span>
+                        @Html.Raw(Model.CleanSignature)
+                    </span>
+                </div>
+            }
 
             @if (User.Identity.Name == Model.UserUsername || User.IsInRole("Moderator") || User.IsInRole("Administrator"))
             {

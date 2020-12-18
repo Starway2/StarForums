@@ -26,6 +26,10 @@
 
         public int CategoryId { get; set; }
 
+        public string UserSignature { get; set; }
+
+        public string CleanSignature => new HtmlSanitizer().Sanitize(this.UserSignature);
+
         public string UserUserName { get; set; }
 
         public int UserPostsCount { get; set; }

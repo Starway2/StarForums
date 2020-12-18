@@ -24,6 +24,15 @@
                 <div class="p-0 m-2 text-left">
                     <p class="m-1 d-inline-block">@Html.Raw(Model.CleanContent)</p>
                 </div>
+                @if (Model.User.Signature != null)
+                {
+                    <hr />
+                    <div>
+                        <span>
+                            @Html.Raw(Model.CleanSignature)
+                        </span>
+                    </div>
+                }
                 @if (User.Identity.Name == Model.UserUserName || User.IsInRole("Moderator") || User.IsInRole("Administrator"))
                 {
                     <div class="align-bot-right d-inline-block position-absolute m-2">

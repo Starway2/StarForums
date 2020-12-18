@@ -30,6 +30,10 @@
 
         public string UserAvatarUrl { get; set; }
 
+        public string UserSignature { get; set; }
+
+        public string CleanSignature => new HtmlSanitizer().Sanitize(this.UserSignature);
+
         public ApplicationUser User { get; set; }
     }
 }
