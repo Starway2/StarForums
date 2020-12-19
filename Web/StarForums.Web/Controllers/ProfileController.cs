@@ -85,23 +85,24 @@
 
             if (file != null)
             {
-                if (size < 5000000)
+                if (size > 5000000)
                 {
-                    using var stream = new MemoryStream();
-                    await file.CopyToAsync(stream);
-
-                    var fileName = $"{Guid.NewGuid()}_{file.FileName}_{this.User.Identity.Name}";
-
-                    var upload = await this.profileService.ChangeAvatar(fileName, stream, this.userManager.GetUserId(this.User));
-                    if (upload == false)
-                    {
-                        return this.BadRequest();
-                    }
-
-                    return this.RedirectToAction("Index");
+                    return this.BadRequest();
                 }
 
-                return this.BadRequest();
+                using var stream = new MemoryStream();
+                await file.CopyToAsync(stream);
+
+                var fileName = $"{Guid.NewGuid()}_{file.FileName}_{this.User.Identity.Name}";
+
+                var upload = await this.profileService.ChangeAvatar(fileName, stream, this.userManager.GetUserId(this.User));
+
+                if (upload == false)
+                {
+                    return this.BadRequest();
+                }
+
+                return this.RedirectToAction("Index");
             }
 
             return this.NotFound();

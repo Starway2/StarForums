@@ -1,6 +1,5 @@
 ﻿namespace StarForums.Web.Controllers
 {
-    using CloudinaryDotNet.Actions;
     using Microsoft.AspNetCore.Mvc;
 
     public class StatusCodeController : Controller
@@ -14,9 +13,9 @@
                     return this.View("NotFound");
                 case 403:
                     return this.View("Forbidden");
+                default:
+                    return this.View("NotFound");
             }
-
-            return this.View();
         }
     }
 }
