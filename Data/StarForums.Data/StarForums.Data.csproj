@@ -27,6 +27,10 @@
     <Compile Remove="Migrations\20201121172836_RemoveAvatarFromApplicationUser.Designer.cs" />
     <Compile Remove="Migrations\20201121175437_AddSettingIdToApplicationUser.cs" />
     <Compile Remove="Migrations\20201121175437_AddSettingIdToApplicationUser.Designer.cs" />
+    <Compile Remove="Migrations\20201219090839_AddMessageBox.cs" />
+    <Compile Remove="Migrations\20201219090839_AddMessageBox.Designer.cs" />
+    <Compile Remove="Migrations\20201219091630_AddMessageBox.cs" />
+    <Compile Remove="Migrations\20201219091630_AddMessageBox.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

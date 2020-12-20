@@ -71,6 +71,7 @@
             services.AddTransient<ICommentsService, CommentsService>();
             services.AddTransient<IProfileService, ProfileService>();
             services.AddTransient<IUserInfoService, UserInfoService>();
+            services.AddTransient<IMessageService, MessageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

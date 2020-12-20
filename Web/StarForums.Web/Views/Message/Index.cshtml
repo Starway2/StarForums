@@ -1,0 +1,17 @@
+﻿@model StarForums.Web.ViewModels.Messages.MessageListViewModel
+@{
+    this.ViewData["Title"] = "Inbox";
+}
+
+<div>
+    <partial name="_MessagesMenuPartial" />
+    <div class="p-2 mt-0 border border-dark position-relative">
+        @foreach (var message in Model.Messages)
+        {
+            <div>
+                <div>@message.Title</div>
+                <div>@message.SenderUsernme</div>
+            </div>
+        }
+    </div>
+</div>

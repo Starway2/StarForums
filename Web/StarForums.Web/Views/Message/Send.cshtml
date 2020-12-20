@@ -1,0 +1,25 @@
+﻿@model StarForums.Web.ViewModels.Messages.MessageInputModel
+
+<div>
+    <partial name="_MessagesMenuPartial" />
+    <div class="p-2 mt-0 border border-dark position-relative">
+        <form method="post" class="form-group text-center mb-0">
+            <div class="text-left">
+                <label asp-for="ReceiverUsername" class="d-inline"></label>
+                <input type="text" asp-for="ReceiverUsername" class="form-control mb-2 col-4 d-inline" />
+                <span class="text-danger" asp-validation-for="ReceiverUsername"></span>
+            </div>
+            <div class="text-left">
+                <label asp-for="Title" class="d-inline"></label>
+                <input type="text" asp-for="Title" class="form-control mb-2 col-4 d-inline" />
+                <span class="text-danger" asp-validation-for="Title"></span>
+            </div>
+            <div>
+                <textarea asp-for="Content" id="text-editor" class="form-control"></textarea>
+                <span class="text-danger" asp-validation-for="Content"></span>
+            </div>
+            <input type="hidden" asp-for="SenderUsername" value="@this.User.Identity.Name" />
+            <button type="submit" asp-controller="Message" asp-action="Send" class="btn btn-outline-dark btn-sm mt-2">Send</button>
+        </form>
+    </div>
+</div>

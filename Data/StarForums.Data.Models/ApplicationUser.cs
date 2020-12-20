@@ -17,6 +17,8 @@ namespace StarForums.Data.Models
             this.Logins = new HashSet<IdentityUserLogin<string>>();
             this.Posts = new HashSet<Post>();
             this.Comments = new HashSet<Comment>();
+            this.SentMessages = new HashSet<Message>();
+            this.ReceivedMessages = new HashSet<Message>();
         }
 
         // Audit info
@@ -33,6 +35,12 @@ namespace StarForums.Data.Models
 
         public DateTime? DeletedOn { get; set; }
 
+        public virtual UserInfo Info { get; set; }
+
+        public virtual ICollection<Message> SentMessages { get; set; }
+
+        public virtual ICollection<Message> ReceivedMessages { get; set; }
+
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
@@ -42,7 +50,5 @@ namespace StarForums.Data.Models
         public virtual ICollection<Post> Posts { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
-
-        public virtual UserInfo Info { get; set; }
     }
 }
