@@ -20,6 +20,8 @@
 
         public IEnumerable<T> GetAllSentByUserId<T>(string userId) => this.repository.All().Where(x => x.SenderId == userId).To<T>().ToList();
 
+        public T GetById<T>(int id) => this.repository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
+
         public async Task SendMessageAsync(string content, string title, string receiverId, string senderId)
         {
             var message = new Message()

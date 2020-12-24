@@ -9,6 +9,8 @@
 
         IEnumerable<T> GetAllSentByUserId<T>(string userId);
 
+        T GetById<T>(int id);
+
         Task SendMessageAsync(string content, string title, string receiverId, string senderId);
     }
 }

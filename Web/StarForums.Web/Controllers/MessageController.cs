@@ -2,6 +2,7 @@
 {
     using System.Linq;
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -21,7 +22,15 @@
         }
 
         [Authorize]
-        public IActionResult Index()
+        public IActionResult Index(int id)
+        {
+            var message = this.service.GetById<MessageViewModel>(id);
+
+            return this.View(message);
+        }
+
+        [Authorize]
+        public IActionResult Inbox()
         {
             var userId = this.userManager.GetUserId(this.User);
 
@@ -34,18 +43,19 @@
         [Authorize]
         public IActionResult Sent()
         {
-            return this.View();
+            var messages = new MessageListViewModel() { Messages = this.service.GetAllSentByUserId<MessageViewModel>(this.userManager.GetUserId(this.User)).ToList() };
+            return this.View(messages);
         }
 
         [Authorize]
-        public IActionResult Send()
+        public IActionResult Write()
         {
             return this.View();
         }
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Send(MessageInputModel model)
+        public async Task<IActionResult> Write(MessageInputModel model)
         {
             if (!this.ModelState.IsValid || this.User.Identity.Name != model.SenderUsername)
             {

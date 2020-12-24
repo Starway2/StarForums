@@ -1,5 +1,7 @@
 ﻿@model StarForums.Web.ViewModels.Messages.MessageInputModel
-
+@{ 
+    this.ViewData["Title"] = "Send message";
+}
 <div>
     <partial name="_MessagesMenuPartial" />
     <div class="p-2 mt-0 border border-dark position-relative">
@@ -15,8 +17,8 @@
                 <span class="text-danger" asp-validation-for="Title"></span>
             </div>
             <div>
-                <textarea asp-for="Content" id="text-editor" class="form-control"></textarea>
                 <span class="text-danger" asp-validation-for="Content"></span>
+                <textarea asp-for="Content" id="text-editor" class="form-control"></textarea>
             </div>
             <input type="hidden" asp-for="SenderUsername" value="@this.User.Identity.Name" />
             <button type="submit" asp-controller="Message" asp-action="Send" class="btn btn-outline-dark btn-sm mt-2">Send</button>
